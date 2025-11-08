@@ -17,7 +17,7 @@ class AuthService
     {
         $educador = $this->authRepository->findByCpf($cpf);
 
-        if (! $educador || ! Hash::check($password, $educador->password)) {
+        if (! $educador || ! Hash::check($password, $educador->senha)) {
             return null;
         }
 

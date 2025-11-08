@@ -7,17 +7,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Educador extends Authenticatable
 {
+    protected $table = 'educadores';
+
     protected $fillable = [
         'email',
         'cpf',
         'telefone',
-        'password',
+        'senha',
         'disciplina',
         'turno'
     ];
 
     protected $hidden = [
-        'password',
+        'senha',
         'remember_token',
     ];
 

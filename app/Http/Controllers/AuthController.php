@@ -20,7 +20,7 @@ class AuthController extends Controller
             $credentials['password'],
         );
 
-        if (! $result) {
+        if (!$result) {
             return response()->json([
                 'message' => 'Credenciais inválidas.',
             ], Response::HTTP_UNAUTHORIZED);
