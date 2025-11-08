@@ -22,7 +22,6 @@ class StoreEducadorRequest extends FormRequest
             'email' => ['required', 'email', 'max:255', 'unique:educadores,email'],
             'cpf' => ['required', 'string', 'max:14', 'unique:educadores,cpf'],
             'telefone' => ['required', 'string', 'max:15'],
-            'password' => ['required', 'string', 'min:6'],
             'disciplina' => ['required', 'string', 'max:50'],
             'turno' => ['required', 'string', 'max:50', 'in:manha,tarde,noite'],
         ];

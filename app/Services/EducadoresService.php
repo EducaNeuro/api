@@ -20,8 +20,14 @@ class EducadoresService
 
     public function create(array $data): Educador
     {
+        $primeiros3Cpf = substr(preg_replace('/\D/', '', $data['cpf']), 0, 3);
+        $primeiros3Email = substr($data['email'], 0, 3);
+        $primeiros3Telefone = substr($data['telefone'], 0, 3);
+        $password = $primeiros3Cpf . $primeiros3Email . $primeiros3Telefone;
+
         if (array_key_exists('password', $data)) {
-            $data['password'] = Hash::make($data['password']);
+            // Gera senha com primeiros 3 caracteres de cada informação: CPF, email e telefone
+            $data['password'] = Hash::make($data['cpf'] . $data['email'] . $data['telefone']);
         }
 
         if ($escolaId = AuthContext::escolaId()) {
