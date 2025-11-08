@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('alunos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nome', 255);
+            $table->string('nome', 255)->nullable();
             $table->smallInteger('idade')->nullable();
-            $table->string('escolaridade', 255);
-            $table->string('turno', 50);
-            $table->string('turma', 50);
-            $table->foreignId('escola_id')->constrained('escolas');
+            $table->string('escolaridade', 255)->nullable();
+            $table->string('turno', 50)->nullable();
+            $table->string('turma', 50)->nullable();
+            $table->foreignId('escola_id')->nullable()->constrained('escolas');
             $table->timestamps();
 
             $table->index('escola_id');

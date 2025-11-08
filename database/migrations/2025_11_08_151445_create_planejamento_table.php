@@ -14,15 +14,16 @@ return new class extends Migration
         Schema::create('planejamento', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('aluno_id')
+                ->nullable()
                 ->constrained('alunos')
                 ->cascadeOnDelete();
-            $table->text('adaptacoes_ambientais');
-            $table->text('organizacao_rotina');
-            $table->text('estrategias_principais');
-            $table->text('outros_recursos');
-            $table->text('objetivos');
-            $table->text('estrategias');
-            $table->text('observacoes_gerais');
+            $table->text('adaptacoes_ambientais')->nullable();
+            $table->text('organizacao_rotina')->nullable();
+            $table->text('estrategias_principais')->nullable();
+            $table->text('outros_recursos')->nullable();
+            $table->text('objetivos')->nullable();
+            $table->text('estrategias')->nullable();
+            $table->text('observacoes_gerais')->nullable();
             $table->timestamps();
 
             $table->index('aluno_id');

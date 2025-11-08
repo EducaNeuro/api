@@ -19,17 +19,17 @@ class UpdateOrientacaoPedagogicaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'aluno_id' => ['sometimes', 'integer', 'exists:alunos,id'],
-            'estimulos_recomendados' => ['sometimes', 'nullable', 'string'],
-            'recursos_recomendados' => ['sometimes', 'nullable', 'string'],
-            'estrategias_pedagogicas' => ['sometimes', 'nullable', 'string'],
-            'recursos_didaticos' => ['sometimes', 'nullable', 'string'],
-            'procedimentos_intervencao' => ['sometimes', 'nullable', 'string'],
-            'adaptacoes_curriculares' => ['sometimes', 'nullable', 'string'],
-            'avaliacao_adaptada' => ['sometimes', 'nullable', 'string'],
-            'tempo_adicional' => ['sometimes', 'nullable', 'string', 'max:255'],
-            'apoio_tecnologico' => ['sometimes', 'nullable', 'string', 'max:255'],
-            'outras_orientacoes' => ['sometimes', 'nullable', 'string'],
+            'aluno_id' => ['nullable', 'integer', 'exists:alunos,id'],
+            'estimulos_recomendados' => ['nullable', 'string'],
+            'recursos_recomendados' => ['nullable', 'string'],
+            'estrategias_pedagogicas' => ['nullable', 'string'],
+            'recursos_didaticos' => ['nullable', 'string'],
+            'procedimentos_intervencao' => ['nullable', 'string'],
+            'adaptacoes_curriculares' => ['nullable', 'string'],
+            'avaliacao_adaptada' => ['nullable', 'string'],
+            'tempo_adicional' => ['nullable', 'string', 'max:255'],
+            'apoio_tecnologico' => ['nullable', 'string', 'max:255'],
+            'outras_orientacoes' => ['nullable', 'string'],
         ];
     }
 

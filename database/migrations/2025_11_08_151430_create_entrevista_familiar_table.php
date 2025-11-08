@@ -14,17 +14,18 @@ return new class extends Migration
         Schema::create('entrevista_familiar', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('aluno_id')
+                ->nullable()
                 ->constrained('alunos')
                 ->cascadeOnDelete();
-            $table->text('gestacao_e_primeiros_meses');
-            $table->text('sociabilidade');
-            $table->text('comportamento');
-            $table->boolean('sensibilidade_sensorial');
-            $table->boolean('quadro_convulsivo');
-            $table->boolean('uso_medicamento');
-            $table->text('composicao_familiar');
-            $table->text('interesses_pessoais');
-            $table->text('esteriotipia');
+            $table->text('gestacao_e_primeiros_meses')->nullable();
+            $table->text('sociabilidade')->nullable();
+            $table->text('comportamento')->nullable();
+            $table->boolean('sensibilidade_sensorial')->nullable();
+            $table->boolean('quadro_convulsivo')->nullable();
+            $table->boolean('uso_medicamento')->nullable();
+            $table->text('composicao_familiar')->nullable();
+            $table->text('interesses_pessoais')->nullable();
+            $table->text('esteriotipia')->nullable();
             $table->string('servicos_apoio', 255)->nullable();
             $table->timestamps();
 

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Meta extends Model
 {
-    protected $table = "meta";
+    protected $table = "metas";
 
     protected $fillable = [
         'aluno_id',

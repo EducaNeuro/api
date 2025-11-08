@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('metas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('aluno_id')
+                ->nullable()
                 ->constrained('alunos')
                 ->cascadeOnDelete();
-            $table->text('descricao_meta');
-            $table->text('indicador_sucesso');
-            $table->date('prazo');
-            $table->text('observacoes_gerais');
+            $table->text('descricao_meta')->nullable();
+            $table->text('indicador_sucesso')->nullable();
+            $table->date('prazo')->nullable();
+            $table->text('observacoes_gerais')->nullable();
             $table->timestamps();
 
             $table->index('aluno_id');

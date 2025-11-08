@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('plano_trimestral', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('planejamento_id')
+                ->nullable()
                 ->constrained('planejamento')
                 ->cascadeOnDelete();
-            $table->text('objetivo');
-            $table->text('estrategias');
+            $table->text('objetivo')->nullable();
+            $table->text('estrategias')->nullable();
             $table->timestamps();
 
             $table->index('planejamento_id');

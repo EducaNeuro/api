@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('educadores', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('email', 255)->unique();
-            $table->string('cpf', 14)->unique();
-            $table->string('telefone', 15);
-            $table->string('password', 255);
+            $table->string('email', 255)->unique()->nullable();
+            $table->string('cpf', 14)->unique()->nullable();
+            $table->string('telefone', 15)->nullable();
+            $table->string('password', 255)->nullable();
             $table->string('remember_token', 100)->nullable();
-            $table->string('disciplina', 50);
-            $table->string('turno', 50);
+            $table->string('disciplina', 50)->nullable();
+            $table->string('turno', 50)->nullable();
             $table->timestamps();
         });
     }

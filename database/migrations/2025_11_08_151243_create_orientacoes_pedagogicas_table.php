@@ -14,18 +14,19 @@ return new class extends Migration
         Schema::create('orientacoes_pedagogicas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('aluno_id')
+                ->nullable()
                 ->constrained('alunos')
                 ->cascadeOnDelete();
-            $table->text('estimulos_recomendados');
-            $table->text('recursos_recomendados');
-            $table->text('estrategias_pedagogicas');
-            $table->text('recursos_didaticos');
-            $table->text('procedimentos_intervencao');
-            $table->text('adaptacoes_curriculares');
-            $table->text('avaliacao_adaptada');
-            $table->string('tempo_adicional', 255);
-            $table->string('apoio_tecnologico', 255);
-            $table->text('outras_orientacoes');
+            $table->text('estimulos_recomendados')->nullable();
+            $table->text('recursos_recomendados')->nullable();
+            $table->text('estrategias_pedagogicas')->nullable();
+            $table->text('recursos_didaticos')->nullable();
+            $table->text('procedimentos_intervencao')->nullable();
+            $table->text('adaptacoes_curriculares')->nullable();
+            $table->text('avaliacao_adaptada')->nullable();
+            $table->string('tempo_adicional', 255)->nullable();
+            $table->string('apoio_tecnologico', 255)->nullable();
+            $table->text('outras_orientacoes')->nullable();
             $table->timestamps();
 
             $table->index('aluno_id');

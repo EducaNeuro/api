@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('escolas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nome', 255);
-            $table->foreignId('secretaria_id')->constrained('secretarias');
+            $table->string('nome', 255)->nullable();
+            $table->foreignId('secretaria_id')->nullable()->constrained('secretarias');
             $table->timestamps();
 
             $table->index('secretaria_id');

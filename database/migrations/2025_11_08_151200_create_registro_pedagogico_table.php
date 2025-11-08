@@ -13,20 +13,21 @@ return new class extends Migration
     {
         Schema::create('registro_pedagogico', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('registro_desenvolvimento');
-            $table->text('observacoes_pedagogicas');
-            $table->text('progresso_observado');
-            $table->text('dificuldades_encontradas');
-            $table->text('estrategias_utilizadas');
-            $table->text('resultados_obtidos');
-            $table->text('proximos_passos');
-            $table->foreignId('anexo_id')->constrained('anexos');
-            $table->date('data_avaliacao');
-            $table->date('proxima_avaliacao');
-            $table->text('observacao_avaliacao');
-            $table->text('participacao_familia');
-            $table->text('orientacao_familia');
+            $table->text('registro_desenvolvimento')->nullable();
+            $table->text('observacoes_pedagogicas')->nullable();
+            $table->text('progresso_observado')->nullable();
+            $table->text('dificuldades_encontradas')->nullable();
+            $table->text('estrategias_utilizadas')->nullable();
+            $table->text('resultados_obtidos')->nullable();
+            $table->text('proximos_passos')->nullable();
+            $table->foreignId('anexo_id')->nullable()->constrained('anexos');
+            $table->date('data_avaliacao')->nullable();
+            $table->date('proxima_avaliacao')->nullable();
+            $table->text('observacao_avaliacao')->nullable();
+            $table->text('participacao_familia')->nullable();
+            $table->text('orientacao_familia')->nullable();
             $table->foreignId('aluno_id')
+                ->nullable()
                 ->constrained('alunos')
                 ->cascadeOnDelete();
             $table->timestamps();
