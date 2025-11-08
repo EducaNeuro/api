@@ -24,6 +24,7 @@ class UpdateAlunoRequest extends FormRequest
             'escolaridade' => ['sometimes', 'string', 'max:255'],
             'turno' => ['sometimes', 'string', 'max:50'],
             'turma' => ['sometimes', 'string', 'max:50'],
+            'data_nascimento' => ['sometimes', 'date'],
             'escola_id' => ['sometimes', 'integer', 'exists:escolas,id'],
         ];
     }

@@ -16,6 +16,7 @@ class Aluno extends Model
         'escolaridade',
         'turno',
         'turma',
+        'data_nascimento',
         'escola_id'
     ];
 

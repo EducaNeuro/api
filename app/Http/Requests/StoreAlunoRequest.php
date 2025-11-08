@@ -19,12 +19,13 @@ class StoreAlunoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => ['required', 'string', 'max:255'],
+            'nome' => ['nullable', 'string', 'max:255'],
             'idade' => ['nullable', 'integer', 'min:0'],
-            'escolaridade' => ['required', 'string', 'max:255'],
-            'turno' => ['required', 'string', 'max:50'],
-            'turma' => ['required', 'string', 'max:50'],
-            'escola_id' => ['required', 'integer', 'exists:escolas,id'],
+            'escolaridade' => ['nullable', 'string', 'max:255'],
+            'turno' => ['nullable', 'string', 'max:50'],
+            'turma' => ['nullable', 'string', 'max:50'],
+            'data_nascimento' => ['nullable', 'date'],
+            'escola_id' => ['nullable', 'integer', 'exists:escolas,id'],
         ];
     }
 

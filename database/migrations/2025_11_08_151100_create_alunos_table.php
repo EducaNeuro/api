@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('escolaridade', 255)->nullable();
             $table->string('turno', 50)->nullable();
             $table->string('turma', 50)->nullable();
+            $table->date('data_nascimento')->nullable();
             $table->foreignId('escola_id')->nullable()->constrained('escolas');
             $table->timestamps();
 
