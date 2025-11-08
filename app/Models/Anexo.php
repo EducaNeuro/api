@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Anexo extends Model
 {
-    protected $table = "anexo";
+    protected $table = 'anexos';
 
     protected $fillable = [
         'url',
-        'observacao'
+        'observacao',
     ];
 
     public function registrosPedagogicos(): HasMany

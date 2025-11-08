@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('anexos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('url', 255)->nullable();
+            $table->string('url', 1024);
             $table->text('observacao')->nullable();
             $table->timestamps();
         });

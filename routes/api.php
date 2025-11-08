@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnexosController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\InventarioHabilidadesController;
 use App\Http\Controllers\MetasController;
@@ -99,4 +100,10 @@ Route::middleware('jwt')->group(function () {
     Route::post('/diagnosticos', [DiagnosticosController::class, 'store']);
     Route::put('/diagnosticos/{id}', [DiagnosticosController::class, 'update']);
     Route::delete('/diagnosticos/{id}', [DiagnosticosController::class, 'destroy']);
+
+    Route::get('/anexos', [AnexosController::class, 'index']);
+    Route::get('/anexos/{id}', [AnexosController::class, 'show']);
+    Route::post('/anexos', [AnexosController::class, 'store']);
+    Route::put('/anexos/{id}', [AnexosController::class, 'update']);
+    Route::delete('/anexos/{id}', [AnexosController::class, 'destroy']);
 });
