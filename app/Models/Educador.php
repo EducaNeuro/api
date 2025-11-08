@@ -2,18 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Educador extends Model
+class Educador extends Authenticatable
 {
     protected $fillable = [
         'email',
         'cpf',
         'telefone',
-        'senha',
+        'password',
         'disciplina',
         'turno'
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
     ];
 
     public function alunos(): BelongsToMany

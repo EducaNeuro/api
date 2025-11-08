@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('email', 255)->unique();
             $table->string('cpf', 14)->unique();
             $table->string('telefone', 15);
-            $table->string('senha', 255);
+            $table->string('password', 255);
+            $table->string('remember_token', 100)->nullable();
             $table->string('disciplina', 50);
             $table->string('turno', 50);
             $table->timestamps();
