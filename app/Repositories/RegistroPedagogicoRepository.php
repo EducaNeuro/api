@@ -32,4 +32,9 @@ class RegistroPedagogicoRepository
     {
         $registroPedagogico->delete();
     }
+
+    public function count(): int
+    {
+        return RegistroPedagogico::count();
+    }
 }

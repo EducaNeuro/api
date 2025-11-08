@@ -27,4 +27,9 @@ class HabilidadesRepository
     {
         $habilidade->delete();
     }
+
+    public function count(): int
+    {
+        return Habilidade::count();
+    }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnexosController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InventarioHabilidadesController;
 use App\Http\Controllers\MetasController;
 use App\Http\Controllers\AlunosController;
@@ -22,6 +23,9 @@ Route::post('/auth/login', [AuthController::class, 'login']);
 
 Route::middleware('jwt')->group(function () {
     Route::get('/auth/me', [AuthController::class, 'me']);
+
+    // Dashboard
+    Route::get('/dashboard/statistics', [DashboardController::class, 'statistics']);
 
     Route::get('/orientacoes-pedagogicas', [OrientacoesPedagogicasController::class, 'index']);
     Route::get('/orientacoes-pedagogicas/{id}', [OrientacoesPedagogicasController::class, 'show']);

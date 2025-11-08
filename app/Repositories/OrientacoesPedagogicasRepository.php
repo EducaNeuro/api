@@ -32,4 +32,9 @@ class OrientacoesPedagogicasRepository
     {
         $orientacaoPedagogica->delete();
     }
+
+    public function count(): int
+    {
+        return OrientacaoPedagogica::count();
+    }
 }

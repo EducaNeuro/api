@@ -32,4 +32,9 @@ class PlanejamentoRepository
     {
         $planejamento->delete();
     }
+
+    public function count(): int
+    {
+        return Planejamento::count();
+    }
 }

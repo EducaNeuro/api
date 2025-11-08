@@ -19,4 +19,9 @@ class InventarioHabilidadesRepository
     {
         return InventarioHabilidade::findOrFail($id);
     }
+
+    public function count(): int
+    {
+        return InventarioHabilidade::count();
+    }
 }

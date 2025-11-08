@@ -32,4 +32,9 @@ class MetasRepository
     {
         $meta->delete();
     }
+
+    public function count(): int
+    {
+        return Meta::count();
+    }
 }

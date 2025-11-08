@@ -32,4 +32,9 @@ class EducadoresRepository
     {
         $educador->delete();
     }
+
+    public function count(): int
+    {
+        return Educador::count();
+    }
 }

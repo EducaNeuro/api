@@ -27,4 +27,9 @@ class EntrevistaFamiliarRepository
     {
         $entrevistaFamiliar->delete();
     }
+
+    public function count(): int
+    {
+        return EntrevistaFamiliar::count();
+    }
 }
