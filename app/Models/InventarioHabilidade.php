@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class InventarioHabilidade extends Model
 {
     protected $fillable = [
-        'estudante_id',
+        'aluno_id',
         'coordenacao_motora_grossa',
         'coordenacao_motora_fina',
         'equilibrio',
@@ -46,4 +47,9 @@ class InventarioHabilidade extends Model
         'causa_efeito',
         'observacoes_gerais'
     ];
+
+    public function aluno(): BelongsTo
+    {
+        return $this->belongsTo(Aluno::class);
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Educador extends Model
 {
@@ -14,4 +15,9 @@ class Educador extends Model
         'disciplina',
         'turno'
     ];
+
+    public function alunos(): BelongsToMany
+    {
+        return $this->belongsToMany(Aluno::class);
+    }
 }

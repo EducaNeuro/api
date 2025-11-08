@@ -8,7 +8,13 @@ class Secretaria extends Model
 {
     protected $fillable = [
         'nome',
-        'ativo'
+        'ativo',
+        'latitude',
+        'longitude'
+    ];
+
+    protected $casts = [
+        'ativo' => 'boolean',
     ];
 
     public function escolas()

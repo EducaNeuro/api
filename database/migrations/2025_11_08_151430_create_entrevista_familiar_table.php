@@ -24,6 +24,7 @@ return new class extends Migration
             $table->boolean('uso_medicamento');
             $table->text('composicao_familiar');
             $table->text('interesses_pessoais');
+            $table->text('esteriotipia');
             $table->string('servicos_apoio', 255)->nullable();
             $table->timestamps();
 

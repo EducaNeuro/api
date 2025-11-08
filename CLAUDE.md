@@ -59,6 +59,33 @@ npm run build              # Production build with Vite
 
 ## Architecture
 
+### Layered Architecture Pattern
+The project follows a strict layered architecture with dependency injection:
+
+**Controller → Service → Repository**
+
+- **Controllers** (`app/Http/Controllers/`): Handle HTTP requests and inject Services via constructor
+- **Services** (`app/Services/`): Contain business logic and inject Repositories via constructor
+- **Repositories** (`app/Repositories/`): Handle data access and database operations
+- **Models** (`app/Models/`): Eloquent models representing database tables
+
+All layers use constructor dependency injection with readonly properties:
+```php
+public function __construct(private readonly ServiceName $serviceName) {}
+```
+
+### Domain Entities
+The application manages educational/pedagogical entities including:
+- Secretarias (Secretariats), Escolas (Schools), Educadores (Educators)
+- Alunos (Students), Responsaveis (Guardians)
+- Diagnosticos (Diagnostics), EntrevistaFamiliar (Family Interview)
+- Habilidades (Skills), InventarioHabilidades (Skills Inventory)
+- Planejamento (Planning), PlanoTrimestral (Quarterly Plan)
+- OrientacaoPedagogica (Pedagogical Guidance), RegistroPedagogico (Pedagogical Record)
+- Metas (Goals), Anexos (Attachments)
+
+Each entity has its own Controller, Service, and Repository.
+
 ### Database Configuration
 - Default connection: PostgreSQL
 - Database name: `api`

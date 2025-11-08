@@ -18,8 +18,8 @@ class Escola extends Model
         return $this->belongsTo(Secretaria::class);
     }
 
-    public function estudantes(): HasMany
+    public function alunos(): HasMany
     {
-        return $this->hasMany(Estudante::class);
+        return $this->hasMany(Aluno::class);
     }
 }

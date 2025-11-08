@@ -3,11 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class EntrevistaFamiliar extends Model
 {
+    protected $table = 'entrevista_familiar';
+
     protected $fillable = [
-        'estudante_id',
+        'aluno_id',
         'gestacao_e_primeiros_meses',
         'sociabilidade',
         'comportamento',
@@ -16,6 +19,18 @@ class EntrevistaFamiliar extends Model
         'uso_medicamento',
         'composicao_familiar',
         'interesses_pessoais',
+        'esteriotipia',
         'servicos_apoio'
     ];
+
+    protected $casts = [
+        'sensibilidade_sensorial' => 'boolean',
+        'quadro_convulsivo' => 'boolean',
+        'uso_medicamento' => 'boolean',
+    ];
+
+    public function aluno(): BelongsTo
+    {
+        return $this->belongsTo(Aluno::class);
+    }
 }

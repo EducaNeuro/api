@@ -5,14 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Responsavel extends Model
+class Diagnostico extends Model
 {
     protected $fillable = [
-        'aluno_id',
         'nome',
-        'nivel_parental',
-        'cpf',
-        'senha'
+        'aluno_id',
+        'observacoes'
     ];
 
     public function aluno(): BelongsTo
