@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Anexo extends Model
 {
+    protected $table = "anexo";
+
     protected $fillable = [
         'url',
         'observacao'

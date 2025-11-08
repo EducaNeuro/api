@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Responsavel extends Model
 {
+    protected $table = "responsavel";
     protected $fillable = [
         'aluno_id',
         'nome',
