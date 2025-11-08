@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -15,7 +16,8 @@ class Educador extends Authenticatable
         'telefone',
         'password',
         'disciplina',
-        'turno'
+        'turno',
+        'escola_id',
     ];
 
     protected $hidden = [
@@ -26,5 +28,10 @@ class Educador extends Authenticatable
     public function alunos(): BelongsToMany
     {
         return $this->belongsToMany(Aluno::class);
+    }
+
+    public function escola(): BelongsTo
+    {
+        return $this->belongsTo(Escola::class);
     }
 }

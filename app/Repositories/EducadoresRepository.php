@@ -5,9 +5,12 @@ use App\Models\Educador;
 
 class EducadoresRepository
 {
-    public function all()
+    public function all(?int $escolaId = null)
     {
-        return Educador::all();
+        return Educador::when(
+            $escolaId,
+            fn ($query, $id) => $query->where('escola_id', $id)
+        )->get();
     }
 
     public function create(array $data): Educador
@@ -15,9 +18,12 @@ class EducadoresRepository
         return Educador::create($data);
     }
 
-    public function findOrFail(int $id): Educador
+    public function findOrFail(int $id, ?int $escolaId = null): Educador
     {
-        return Educador::findOrFail($id);
+        return Educador::when(
+            $escolaId,
+            fn ($query, $id) => $query->where('escola_id', $id)
+        )->findOrFail($id);
     }
 
     public function update(Educador $educador, array $data): Educador

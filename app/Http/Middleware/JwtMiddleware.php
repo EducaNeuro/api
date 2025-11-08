@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Services\AuthService;
+use App\Support\AuthContext;
 use Closure;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -29,8 +30,13 @@ class JwtMiddleware
         $request->attributes->set('auth_user', $authData['user']);
         $request->attributes->set('auth_user_type', $authData['type']);
         $request->setUserResolver(fn () => $authData['user']);
+        AuthContext::set($authData['user'], $authData['type']);
 
-        return $next($request);
+        try {
+            return $next($request);
+        } finally {
+            AuthContext::clear();
+        }
     }
 
     private function extractToken(Request $request): ?string
