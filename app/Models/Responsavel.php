@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Responsavel extends Model
 {
-    protected $table = "responsavel";
+    protected $table = 'responsaveis';
+
     protected $fillable = [
         'aluno_id',
         'nome',
         'nivel_parental',
         'cpf',
-        'senha'
+        'telefone',
     ];
 
     public function aluno(): BelongsTo

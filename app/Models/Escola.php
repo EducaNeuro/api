@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Escola extends Model
 {
-    protected $table = "escola";
+    protected $table = 'escolas';
+
     protected $fillable = [
         'nome',
-        'secretaria_id'
+        'secretaria_id',
     ];
 
     public function secretaria(): BelongsTo
