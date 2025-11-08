@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreMetaRequest extends FormRequest
+class StoreHabilidadeRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -19,19 +19,19 @@ class StoreMetaRequest extends FormRequest
     {
         return [
             'aluno_id' => ['required', 'integer', 'exists:alunos,id'],
-            'descricao_meta' => ['nullable', 'string'],
-            'indicador_sucesso' => ['nullable', 'string'],
-            'prazo' => ['nullable', 'date'],
-            'observacoes_gerais' => ['nullable', 'string'],
+            'autonomia_pessoal' => ['nullable', 'string'],
+            'socializacao' => ['nullable', 'string'],
+            'motricidade' => ['nullable', 'string'],
+            'comunicacao' => ['nullable', 'string'],
+            'desenvolvimento_cognitivo' => ['nullable', 'string'],
+            'aspectos_comportamentais' => ['nullable', 'string'],
         ];
     }
-
 
     public function messages(): array
     {
         return [
             '*.string' => 'O campo :attribute deve ser uma string.',
-            '*.date' => 'O campo :attribute deve ser uma data válida.',
             '*.exists' => 'O campo :attribute deve ser um ID válido.',
             '*.integer' => 'O campo :attribute deve ser um número inteiro.',
         ];

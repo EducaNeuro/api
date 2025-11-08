@@ -6,6 +6,7 @@ use App\Http\Controllers\MetasController;
 use App\Http\Controllers\AlunosController;
 use App\Http\Controllers\EducadoresController;
 use App\Http\Controllers\EscolasController;
+use App\Http\Controllers\HabilidadesController;
 use App\Http\Controllers\OrientacoesPedagogicasController;
 use App\Http\Controllers\ResponsaveisController;
 use App\Http\Controllers\SecretariasController;
@@ -28,6 +29,10 @@ Route::middleware('jwt')->group(function () {
     Route::post('/metas', [MetasController::class, 'store']);
     Route::put('/metas/{id}', [MetasController::class, 'update']);
     Route::delete('/metas/{id}', [MetasController::class, 'destroy']);
+
+    Route::post('/habilidades', [HabilidadesController::class, 'store']);
+    Route::put('/habilidades/{id}', [HabilidadesController::class, 'update']);
+    Route::delete('/habilidades/{id}', [HabilidadesController::class, 'destroy']);
 
     Route::post('/alunos', [AlunosController::class, 'store']);
     Route::put('/alunos/{id}', [AlunosController::class, 'update']);
