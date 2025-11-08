@@ -17,14 +17,12 @@ return new class extends Migration
             $table->foreignId('aluno_id')
                 ->constrained('alunos')
                 ->cascadeOnDelete();
-            $table->foreignId('nivel_parental_id')
-                ->constrained('niveis_parentais');
+            $table->string('nivel_parental', 100);
             $table->string('cpf', 14)->unique();
             $table->string('senha', 255);
             $table->timestamps();
 
             $table->index('aluno_id');
-            $table->index('nivel_parental_id');
         });
     }
 
