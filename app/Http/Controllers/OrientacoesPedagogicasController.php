@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreOrientacaoPedagogicaRequest;
+use App\Http\Requests\UpdateOrientacaoPedagogicaRequest;
 use App\Services\OrientacoesPedagogicasService;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class OrientacoesPedagogicasController extends Controller
 {
@@ -12,4 +15,32 @@ class OrientacoesPedagogicasController extends Controller
         //
     }
 
+    public function store(StoreOrientacaoPedagogicaRequest $request): JsonResponse
+    {
+        $orientacao = $this->orientacoesPedagogicasService->create($request->validated());
+
+        return response()->json($orientacao, Response::HTTP_CREATED);
+    }
+
+    public function update(int $id, UpdateOrientacaoPedagogicaRequest $request): JsonResponse
+    {
+        $data = $request->validated();
+
+        if ($data === []) {
+            return response()->json([
+                'message' => 'Nenhum dado foi informado.',
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
+        $orientacao = $this->orientacoesPedagogicasService->update($id, $data);
+
+        return response()->json($orientacao);
+    }
+
+    public function destroy(int $id): JsonResponse
+    {
+        $this->orientacoesPedagogicasService->delete($id);
+
+        return response()->json(null, Response::HTTP_NO_CONTENT);
+    }
 }
