@@ -5,6 +5,7 @@ use App\Http\Controllers\InventarioHabilidadesController;
 use App\Http\Controllers\MetasController;
 use App\Http\Controllers\AlunosController;
 use App\Http\Controllers\EducadoresController;
+use App\Http\Controllers\EntrevistaFamiliarController;
 use App\Http\Controllers\EscolasController;
 use App\Http\Controllers\HabilidadesController;
 use App\Http\Controllers\OrientacoesPedagogicasController;
@@ -36,6 +37,14 @@ Route::middleware('jwt')->group(function () {
     Route::post('/habilidades', [HabilidadesController::class, 'store']);
     Route::put('/habilidades/{id}', [HabilidadesController::class, 'update']);
     Route::delete('/habilidades/{id}', [HabilidadesController::class, 'destroy']);
+
+    Route::post('/entrevista-familiar', [EntrevistaFamiliarController::class, 'store']);
+    Route::put('/entrevista-familiar/{id}', [EntrevistaFamiliarController::class, 'update']);
+    Route::delete('/entrevista-familiar/{id}', [EntrevistaFamiliarController::class, 'destroy']);
+
+    Route::post('/entrevista-familiar', [EntrevistaFamiliarController::class, 'store']);
+    Route::put('/entrevista-familiar/{id}', [EntrevistaFamiliarController::class, 'update']);
+    Route::delete('/entrevista-familiar/{id}', [EntrevistaFamiliarController::class, 'destroy']);
 
     Route::get('/alunos', [AlunosController::class, 'index']);
     Route::get('/alunos/{id}', [AlunosController::class, 'show']);
