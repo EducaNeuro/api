@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\InventarioHabilidadesController;
 use App\Http\Controllers\OrientacoesPedagogicasController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,4 +16,5 @@ Route::middleware('jwt')->group(function () {
     Route::post('/orientacoes-pedagogicas', [OrientacoesPedagogicasController::class, 'store']);
     Route::put('/orientacoes-pedagogicas/{id}', [OrientacoesPedagogicasController::class, 'update']);
     Route::delete('/orientacoes-pedagogicas/{id}', [OrientacoesPedagogicasController::class, 'destroy']);
+    Route::post('/habilidades', [InventarioHabilidadesController::class, 'create']);
 });
