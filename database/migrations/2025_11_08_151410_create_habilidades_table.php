@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('habilidades', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('aluno_id')
-                ->nullable()
                 ->constrained('alunos')
                 ->cascadeOnDelete();
             $table->text('autonomia_pessoal')->nullable();

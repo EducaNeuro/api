@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('entrevista_familiar', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('aluno_id')
-                ->nullable()
                 ->constrained('alunos')
                 ->cascadeOnDelete();
             $table->text('gestacao_e_primeiros_meses')->nullable();

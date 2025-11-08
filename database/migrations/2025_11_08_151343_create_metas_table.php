@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('metas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('aluno_id')
-                ->nullable()
                 ->constrained('alunos')
                 ->cascadeOnDelete();
             $table->text('descricao_meta')->nullable();

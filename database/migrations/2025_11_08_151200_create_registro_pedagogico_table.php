@@ -27,7 +27,6 @@ return new class extends Migration
             $table->text('participacao_familia')->nullable();
             $table->text('orientacao_familia')->nullable();
             $table->foreignId('aluno_id')
-                ->nullable()
                 ->constrained('alunos')
                 ->cascadeOnDelete();
             $table->timestamps();
