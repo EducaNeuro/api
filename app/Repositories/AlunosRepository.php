@@ -7,7 +7,7 @@ class AlunosRepository
 {
     public function all()
     {
-        return Aluno::with(['escola'])->get();
+        return Aluno::with(['escola', 'diagnosticos'])->get();
     }
 
     public function create(array $data): Aluno
@@ -17,7 +17,7 @@ class AlunosRepository
 
     public function findOrFail(int $id): Aluno
     {
-        return Aluno::with(['escola'])->findOrFail($id);
+        return Aluno::with(['escola', 'diagnosticos'])->findOrFail($id);
     }
 
     public function update(Aluno $aluno, array $data): Aluno
