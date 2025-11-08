@@ -4,11 +4,15 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\InventarioHabilidadesController;
 use App\Http\Controllers\MetasController;
 use App\Http\Controllers\AlunosController;
+use App\Http\Controllers\DiagnosticosController;
 use App\Http\Controllers\EducadoresController;
 use App\Http\Controllers\EntrevistaFamiliarController;
 use App\Http\Controllers\EscolasController;
 use App\Http\Controllers\HabilidadesController;
 use App\Http\Controllers\OrientacoesPedagogicasController;
+use App\Http\Controllers\PlanoTrimestralController;
+use App\Http\Controllers\PlanejamentoController;
+use App\Http\Controllers\RegistroPedagogicoController;
 use App\Http\Controllers\ResponsaveisController;
 use App\Http\Controllers\SecretariasController;
 use Illuminate\Support\Facades\Route;
@@ -71,4 +75,28 @@ Route::middleware('jwt')->group(function () {
     Route::post('/responsaveis', [ResponsaveisController::class, 'store']);
     Route::put('/responsaveis/{id}', [ResponsaveisController::class, 'update']);
     Route::delete('/responsaveis/{id}', [ResponsaveisController::class, 'destroy']);
+
+    Route::get('/planejamentos', [PlanejamentoController::class, 'index']);
+    Route::get('/planejamentos/{id}', [PlanejamentoController::class, 'show']);
+    Route::post('/planejamentos', [PlanejamentoController::class, 'store']);
+    Route::put('/planejamentos/{id}', [PlanejamentoController::class, 'update']);
+    Route::delete('/planejamentos/{id}', [PlanejamentoController::class, 'destroy']);
+
+    Route::get('/planos-trimestrais', [PlanoTrimestralController::class, 'index']);
+    Route::get('/planos-trimestrais/{id}', [PlanoTrimestralController::class, 'show']);
+    Route::post('/planos-trimestrais', [PlanoTrimestralController::class, 'store']);
+    Route::put('/planos-trimestrais/{id}', [PlanoTrimestralController::class, 'update']);
+    Route::delete('/planos-trimestrais/{id}', [PlanoTrimestralController::class, 'destroy']);
+
+    Route::get('/registros-pedagogicos', [RegistroPedagogicoController::class, 'index']);
+    Route::get('/registros-pedagogicos/{id}', [RegistroPedagogicoController::class, 'show']);
+    Route::post('/registros-pedagogicos', [RegistroPedagogicoController::class, 'store']);
+    Route::put('/registros-pedagogicos/{id}', [RegistroPedagogicoController::class, 'update']);
+    Route::delete('/registros-pedagogicos/{id}', [RegistroPedagogicoController::class, 'destroy']);
+
+    Route::get('/diagnosticos', [DiagnosticosController::class, 'index']);
+    Route::get('/diagnosticos/{id}', [DiagnosticosController::class, 'show']);
+    Route::post('/diagnosticos', [DiagnosticosController::class, 'store']);
+    Route::put('/diagnosticos/{id}', [DiagnosticosController::class, 'update']);
+    Route::delete('/diagnosticos/{id}', [DiagnosticosController::class, 'destroy']);
 });
