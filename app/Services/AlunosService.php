@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Aluno;
 use App\Repositories\AlunosRepository;
+use App\Support\AuthContext;
 
 class AlunosService
 {
@@ -11,7 +12,8 @@ class AlunosService
 
     public function all()
     {
-        return $this->alunosRepository->all();
+        $escolaId = AuthContext::escolaId();
+        return $this->alunosRepository->all($escolaId);
     }
 
     public function create(array $data): Aluno

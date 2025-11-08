@@ -6,9 +6,12 @@ use Illuminate\Support\Facades\DB;
 
 class AlunosRepository
 {
-    public function all()
+    public function all(?int $escolaId = null)
     {
-        return Aluno::with(['escola', 'diagnosticos'])->get();
+        return Aluno::when(
+            $escolaId,
+            fn ($query, $id) => $query->where('escola_id', $id)
+        )->with(['escola', 'diagnosticos'])->get();
     }
 
     public function create(array $data): Aluno
