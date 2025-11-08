@@ -10,19 +10,29 @@ class EducadoresService
 {
     public function __construct(private readonly EducadoresRepository $educadoresRepository) {}
 
+    public function all()
+    {
+        return $this->educadoresRepository->all();
+    }
+
     public function create(array $data): Educador
     {
-        $data['senha'] = Hash::make($data['senha']);
+        $data['password'] = Hash::make($data['password']);
 
         return $this->educadoresRepository->create($data);
+    }
+
+    public function find(int $id): Educador
+    {
+        return $this->educadoresRepository->findOrFail($id);
     }
 
     public function update(int $id, array $data): Educador
     {
         $educador = $this->educadoresRepository->findOrFail($id);
 
-        if (array_key_exists('senha', $data)) {
-            $data['senha'] = Hash::make($data['senha']);
+        if (array_key_exists('password', $data)) {
+            $data['password'] = Hash::make($data['password']);
         }
 
         return $this->educadoresRepository->update($educador, $data);

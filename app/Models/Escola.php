@@ -2,17 +2,25 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Escola extends Model
+class Escola extends Authenticatable
 {
     protected $table = 'escolas';
 
     protected $fillable = [
         'nome',
+        'email',
+        'password',
+        'remember_token',
         'secretaria_id',
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
     ];
 
     public function secretaria(): BelongsTo

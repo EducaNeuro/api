@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AlunoSeeder extends Seeder
 {
@@ -23,6 +24,9 @@ class AlunoSeeder extends Seeder
                 'ativo' => true,
                 'latitude' => -23.550520,
                 'longitude' => -46.633308,
+                'email' => 'secretaria@example.com',
+                'password' => Hash::make('12345'),
+                'remember_token' => null,
                 'created_at' => $now,
                 'updated_at' => $now,
             ]);
@@ -33,6 +37,9 @@ class AlunoSeeder extends Seeder
         if (! $escolaId) {
             $escolaId = DB::table('escolas')->insertGetId([
                 'nome' => 'Escola Municipal Aprender',
+                'email' => 'escola@example.com',
+                'password' => Hash::make('senha123'),
+                'remember_token' => null,
                 'secretaria_id' => $secretariaId,
                 'created_at' => $now,
                 'updated_at' => $now,

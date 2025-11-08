@@ -24,7 +24,7 @@ class AuthRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cpf' => ['required', 'string', 'exists:educadores,cpf'],
+            'email' => ['required', 'email', 'max:255'],
             'password' => ['required', 'string'],
         ];
     }
@@ -32,9 +32,9 @@ class AuthRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'cpf.required' => 'O CPF é obrigatório.',
-            'cpf.string' => 'O CPF deve ser uma string.',
-            'cpf.exists' => 'O CPF informado não está cadastrado.',
+            'email.required' => 'O e-mail é obrigatório.',
+            'email.email' => 'Informe um e-mail válido.',
+            'email.max' => 'O e-mail deve ter no máximo 255 caracteres.',
             'password.required' => 'A senha é obrigatória.',
             'password.string' => 'A senha deve ser uma string.',
         ];

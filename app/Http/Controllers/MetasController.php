@@ -15,6 +15,16 @@ class MetasController extends Controller
         //
     }
 
+    public function index(): JsonResponse
+    {
+        return response()->json($this->metasService->all());
+    }
+
+    public function show(int $id): JsonResponse
+    {
+        return response()->json($this->metasService->find($id));
+    }
+
     public function store(StoreMetaRequest $request): JsonResponse
     {
         $meta = $this->metasService->create($request->validated());

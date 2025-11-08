@@ -9,8 +9,18 @@ class InventarioHabilidadesService
 {
     public function __construct(private readonly InventarioHabilidadesRepository $inventarioHabilidadesRepository) {}
 
+    public function all()
+    {
+        return $this->inventarioHabilidadesRepository->all();
+    }
+
     public function create(array $data): InventarioHabilidade
     {
         return $this->inventarioHabilidadesRepository->create($data);
+    }
+
+    public function find(int $id): InventarioHabilidade
+    {
+        return $this->inventarioHabilidadesRepository->findOrFail($id);
     }
 }

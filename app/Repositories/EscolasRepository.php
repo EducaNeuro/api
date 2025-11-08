@@ -5,6 +5,11 @@ use App\Models\Escola;
 
 class EscolasRepository
 {
+    public function all()
+    {
+        return Escola::with('secretaria')->get();
+    }
+
     public function create(array $data): Escola
     {
         return Escola::create($data);
@@ -12,7 +17,7 @@ class EscolasRepository
 
     public function findOrFail(int $id): Escola
     {
-        return Escola::findOrFail($id);
+        return Escola::with('secretaria')->findOrFail($id);
     }
 
     public function update(Escola $escola, array $data): Escola

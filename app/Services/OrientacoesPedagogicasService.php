@@ -9,9 +9,19 @@ class OrientacoesPedagogicasService
 {
     public function __construct(private readonly OrientacoesPedagogicasRepository $orientacoesPedagogicasRepository) {}
 
+    public function all()
+    {
+        return $this->orientacoesPedagogicasRepository->all();
+    }
+
     public function create(array $data): OrientacaoPedagogica
     {
         return $this->orientacoesPedagogicasRepository->create($data);
+    }
+
+    public function find(int $id): OrientacaoPedagogica
+    {
+        return $this->orientacoesPedagogicasRepository->findOrFail($id);
     }
 
     public function update(int $id, array $data): OrientacaoPedagogica

@@ -13,13 +13,13 @@ class Educador extends Authenticatable
         'email',
         'cpf',
         'telefone',
-        'senha',
+        'password',
         'disciplina',
         'turno'
     ];
 
     protected $hidden = [
-        'senha',
+        'password',
         'remember_token',
     ];
 

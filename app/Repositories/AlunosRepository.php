@@ -5,6 +5,11 @@ use App\Models\Aluno;
 
 class AlunosRepository
 {
+    public function all()
+    {
+        return Aluno::with(['escola'])->get();
+    }
+
     public function create(array $data): Aluno
     {
         return Aluno::create($data);
@@ -12,7 +17,7 @@ class AlunosRepository
 
     public function findOrFail(int $id): Aluno
     {
-        return Aluno::findOrFail($id);
+        return Aluno::with(['escola'])->findOrFail($id);
     }
 
     public function update(Aluno $aluno, array $data): Aluno

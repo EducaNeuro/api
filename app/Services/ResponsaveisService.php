@@ -9,9 +9,19 @@ class ResponsaveisService
 {
     public function __construct(private readonly ResponsaveisRepository $responsaveisRepository) {}
 
+    public function all()
+    {
+        return $this->responsaveisRepository->all();
+    }
+
     public function create(array $data): Responsavel
     {
         return $this->responsaveisRepository->create($data);
+    }
+
+    public function find(int $id): Responsavel
+    {
+        return $this->responsaveisRepository->findOrFail($id);
     }
 
     public function update(int $id, array $data): Responsavel

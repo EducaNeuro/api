@@ -5,6 +5,11 @@ use App\Models\Educador;
 
 class EducadoresRepository
 {
+    public function all()
+    {
+        return Educador::all();
+    }
+
     public function create(array $data): Educador
     {
         return Educador::create($data);

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\InventarioHabilidadesService;
-use Illuminate\Http\Request;
-use App\Models\InventarioHabilidade;
 use App\Http\Requests\CreateHabilidadesIndividuaisRequest;
+use App\Models\InventarioHabilidade;
+use App\Services\InventarioHabilidadesService;
+use Illuminate\Http\JsonResponse;
 
 class InventarioHabilidadesController extends Controller
 {
@@ -13,9 +13,21 @@ class InventarioHabilidadesController extends Controller
     {
     }
 
-    public function create(CreateHabilidadesIndividuaisRequest $request): InventarioHabilidade
+    public function index(): JsonResponse
     {
-        return $this->inventarioHabilidadesService->create($request->validated());
+        return response()->json($this->inventarioHabilidadesService->all());
+    }
+
+    public function show(int $id): JsonResponse
+    {
+        return response()->json($this->inventarioHabilidadesService->find($id));
+    }
+
+    public function create(CreateHabilidadesIndividuaisRequest $request): JsonResponse
+    {
+        $inventario = $this->inventarioHabilidadesService->create($request->validated());
+
+        return response()->json($inventario, 201);
     }
 
 }

@@ -15,6 +15,16 @@ class AlunosController extends Controller
         //
     }
 
+    public function index(): JsonResponse
+    {
+        return response()->json($this->alunosService->all());
+    }
+
+    public function show(int $id): JsonResponse
+    {
+        return response()->json($this->alunosService->find($id));
+    }
+
     public function store(StoreAlunoRequest $request): JsonResponse
     {
         $aluno = $this->alunosService->create($request->validated());

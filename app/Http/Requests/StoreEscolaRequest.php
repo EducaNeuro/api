@@ -20,6 +20,8 @@ class StoreEscolaRequest extends FormRequest
     {
         return [
             'nome' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255', 'unique:escolas,email'],
+            'password' => ['required', 'string', 'min:6'],
             'secretaria_id' => ['required', 'integer', 'exists:secretarias,id'],
         ];
     }

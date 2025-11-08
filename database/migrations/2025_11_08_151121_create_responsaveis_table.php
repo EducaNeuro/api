@@ -13,14 +13,13 @@ return new class extends Migration
     {
         Schema::create('responsaveis', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nome', 255)->nullable();
+            $table->string('nome', 255);
             $table->foreignId('aluno_id')
-                ->nullable()
                 ->constrained('alunos')
                 ->cascadeOnDelete();
-            $table->string('nivel_parental', 100)->nullable();
-            $table->string('cpf', 14)->unique()->nullable();
-            $table->string('senha', 255)->nullable();
+            $table->string('nivel_parental', 100);
+            $table->string('cpf', 14)->unique();
+            $table->string('telefone', 15)->nullable();
             $table->timestamps();
 
             $table->index('aluno_id');

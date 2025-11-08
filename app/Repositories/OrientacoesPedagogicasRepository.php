@@ -5,6 +5,11 @@ use App\Models\OrientacaoPedagogica;
 
 class OrientacoesPedagogicasRepository
 {
+    public function all()
+    {
+        return OrientacaoPedagogica::all();
+    }
+
     public function create(array $data): OrientacaoPedagogica
     {
         return OrientacaoPedagogica::create($data);

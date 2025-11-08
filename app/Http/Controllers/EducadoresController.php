@@ -15,6 +15,16 @@ class EducadoresController extends Controller
         //
     }
 
+    public function index(): JsonResponse
+    {
+        return response()->json($this->educadoresService->all());
+    }
+
+    public function show(int $id): JsonResponse
+    {
+        return response()->json($this->educadoresService->find($id));
+    }
+
     public function store(StoreEducadorRequest $request): JsonResponse
     {
         $educador = $this->educadoresService->create($request->validated());

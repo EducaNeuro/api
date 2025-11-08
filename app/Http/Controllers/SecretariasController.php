@@ -15,6 +15,16 @@ class SecretariasController extends Controller
         //
     }
 
+    public function index(): JsonResponse
+    {
+        return response()->json($this->secretariasService->all());
+    }
+
+    public function show(int $id): JsonResponse
+    {
+        return response()->json($this->secretariasService->find($id));
+    }
+
     public function store(StoreSecretariaRequest $request): JsonResponse
     {
         $secretaria = $this->secretariasService->create($request->validated());

@@ -20,14 +20,15 @@ class JwtMiddleware
             return $this->unauthorizedResponse();
         }
 
-        $educador = $this->authService->authenticateWithToken($token);
+        $authData = $this->authService->authenticateWithToken($token);
 
-        if (! $educador) {
+        if (! $authData) {
             return $this->unauthorizedResponse();
         }
 
-        $request->attributes->set('educador', $educador);
-        $request->setUserResolver(static fn () => $educador);
+        $request->attributes->set('auth_user', $authData['user']);
+        $request->attributes->set('auth_user_type', $authData['type']);
+        $request->setUserResolver(fn () => $authData['user']);
 
         return $next($request);
     }

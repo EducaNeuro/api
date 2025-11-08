@@ -5,6 +5,11 @@ use App\Models\Meta;
 
 class MetasRepository
 {
+    public function all()
+    {
+        return Meta::all();
+    }
+
     public function create(array $data): Meta
     {
         return Meta::create($data);

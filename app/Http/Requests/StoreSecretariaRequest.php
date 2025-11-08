@@ -20,6 +20,11 @@ class StoreSecretariaRequest extends FormRequest
     {
         return [
             'nome' => ['required', 'string', 'max:255'],
+            'ativo' => ['nullable', 'boolean'],
+            'latitude' => ['nullable', 'numeric', 'between:-90,90'],
+            'longitude' => ['nullable', 'numeric', 'between:-180,180'],
+            'email' => ['required', 'email', 'max:255', 'unique:secretarias,email'],
+            'password' => ['required', 'string', 'min:6'],
         ];
     }
 

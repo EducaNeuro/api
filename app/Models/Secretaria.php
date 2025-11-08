@@ -2,21 +2,29 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Secretaria extends Model
+class Secretaria extends Authenticatable
 {
-    protected $table = "secretarias";
+    protected $table = 'secretarias';
     protected $fillable = [
         'nome',
         'ativo',
         'latitude',
-        'longitude'
+        'longitude',
+        'email',
+        'password',
+        'remember_token',
     ];
 
     protected $casts = [
         'ativo' => 'boolean',
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
     ];
 
     public function escolas(): HasMany

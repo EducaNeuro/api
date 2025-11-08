@@ -15,6 +15,16 @@ class OrientacoesPedagogicasController extends Controller
         //
     }
 
+    public function index(): JsonResponse
+    {
+        return response()->json($this->orientacoesPedagogicasService->all());
+    }
+
+    public function show(int $id): JsonResponse
+    {
+        return response()->json($this->orientacoesPedagogicasService->find($id));
+    }
+
     public function store(StoreOrientacaoPedagogicaRequest $request): JsonResponse
     {
         $orientacao = $this->orientacoesPedagogicasService->create($request->validated());

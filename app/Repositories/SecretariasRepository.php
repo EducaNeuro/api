@@ -5,6 +5,11 @@ use App\Models\Secretaria;
 
 class SecretariasRepository
 {
+    public function all()
+    {
+        return Secretaria::all();
+    }
+
     public function create(array $data): Secretaria
     {
         return Secretaria::create($data);

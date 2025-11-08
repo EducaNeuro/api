@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\Educador;
+use App\Models\Escola;
+use App\Models\Secretaria;
 use App\Repositories\AuthRepository;
 use Illuminate\Support\Facades\Hash;
 use Throwable;
@@ -11,27 +13,41 @@ class AuthService
 {
     private const TOKEN_TTL_MINUTES = 120;
 
+    public const TYPE_EDUCADOR = 'educador';
+    public const TYPE_ESCOLA = 'escola';
+    public const TYPE_SECRETARIA = 'secretaria';
+
     public function __construct(private readonly AuthRepository $authRepository) {}
 
-    public function attempt(string $cpf, string $password): ?array
+    public function attempt(string $email, string $password): ?array
     {
-        $educador = $this->authRepository->findByCpf($cpf);
+        $userData = $this->findUserByEmail($email);
 
-        if (! $educador || ! Hash::check($password, $educador->senha)) {
+        if (! $userData) {
             return null;
         }
 
-        $token = $this->encodeToken($educador);
+        [$user, $type] = $userData;
+
+        if (! Hash::check($password, $user->password)) {
+            return null;
+        }
+
+        $token = $this->encodeToken($user, $type);
 
         return [
-            'educador' => $educador,
+            'user' => $user,
+            'user_type' => $type,
             'access_token' => $token,
             'token_type' => 'Bearer',
             'expires_in' => self::TOKEN_TTL_MINUTES * 60,
         ];
     }
 
-    public function authenticateWithToken(string $token): ?Educador
+    /**
+     * @return array{user:Educador|Escola|Secretaria,type:string}|null
+     */
+    public function authenticateWithToken(string $token): ?array
     {
         $payload = $this->decodeToken($token);
 
@@ -45,16 +61,51 @@ class AuthService
             return null;
         }
 
-        $educadorId = $payload['sub'] ?? null;
+        $userId = $payload['sub'] ?? null;
+        $type = $payload['type'] ?? null;
 
-        if (! $educadorId) {
+        if (! $userId || ! $type) {
             return null;
         }
 
-        return $this->authRepository->findById((int) $educadorId);
+        $user = match ($type) {
+            self::TYPE_EDUCADOR => $this->authRepository->findEducadorById((int) $userId),
+            self::TYPE_ESCOLA => $this->authRepository->findEscolaById((int) $userId),
+            self::TYPE_SECRETARIA => $this->authRepository->findSecretariaById((int) $userId),
+            default => null,
+        };
+
+        if (! $user) {
+            return null;
+        }
+
+        return [
+            'user' => $user,
+            'type' => $type,
+        ];
     }
 
-    private function encodeToken(Educador $educador): string
+    /**
+     * @return array{0: Educador|Escola|Secretaria, 1: string}|null
+     */
+    private function findUserByEmail(string $email): ?array
+    {
+        if ($educador = $this->authRepository->findEducadorByEmail($email)) {
+            return [$educador, self::TYPE_EDUCADOR];
+        }
+
+        if ($escola = $this->authRepository->findEscolaByEmail($email)) {
+            return [$escola, self::TYPE_ESCOLA];
+        }
+
+        if ($secretaria = $this->authRepository->findSecretariaByEmail($email)) {
+            return [$secretaria, self::TYPE_SECRETARIA];
+        }
+
+        return null;
+    }
+
+    private function encodeToken(Educador|Escola|Secretaria $user, string $type): string
     {
         $header = [
             'alg' => 'HS256',
@@ -62,12 +113,16 @@ class AuthService
         ];
 
         $payload = [
-            'sub' => $educador->id,
-            'email' => $educador->email,
-            'cpf' => $educador->cpf,
+            'sub' => $user->id,
+            'email' => $user->email,
+            'type' => $type,
             'iat' => now()->timestamp,
             'exp' => now()->addMinutes(self::TOKEN_TTL_MINUTES)->timestamp,
         ];
+
+        if ($type === self::TYPE_EDUCADOR && $user instanceof Educador) {
+            $payload['cpf'] = $user->cpf;
+        }
 
         $segments = [
             $this->base64UrlEncode(json_encode($header, JSON_THROW_ON_ERROR)),

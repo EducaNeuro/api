@@ -34,7 +34,7 @@ class EducadorSeeder extends Seeder
             Educador::updateOrCreate(
                 ['cpf' => $dados['cpf']],
                 array_merge($dados, [
-                    'senha' => Hash::make('12345'),
+                    'password' => Hash::make('12345'),
                 ])
             );
         }

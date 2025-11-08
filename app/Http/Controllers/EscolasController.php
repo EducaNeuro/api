@@ -15,6 +15,16 @@ class EscolasController extends Controller
         //
     }
 
+    public function index(): JsonResponse
+    {
+        return response()->json($this->escolasService->all());
+    }
+
+    public function show(int $id): JsonResponse
+    {
+        return response()->json($this->escolasService->find($id));
+    }
+
     public function store(StoreEscolaRequest $request): JsonResponse
     {
         $escola = $this->escolasService->create($request->validated());
