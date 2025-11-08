@@ -42,10 +42,6 @@ Route::middleware('jwt')->group(function () {
     Route::put('/entrevista-familiar/{id}', [EntrevistaFamiliarController::class, 'update']);
     Route::delete('/entrevista-familiar/{id}', [EntrevistaFamiliarController::class, 'destroy']);
 
-    Route::post('/entrevista-familiar', [EntrevistaFamiliarController::class, 'store']);
-    Route::put('/entrevista-familiar/{id}', [EntrevistaFamiliarController::class, 'update']);
-    Route::delete('/entrevista-familiar/{id}', [EntrevistaFamiliarController::class, 'destroy']);
-
     Route::get('/alunos', [AlunosController::class, 'index']);
     Route::get('/alunos/{id}', [AlunosController::class, 'show']);
     Route::post('/alunos', [AlunosController::class, 'store']);
