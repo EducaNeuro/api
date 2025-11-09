@@ -153,4 +153,4 @@ class AlunosService
             'data_nascimento' => $aluno->data_nascimento,
         ];
     }
-}
+}   
