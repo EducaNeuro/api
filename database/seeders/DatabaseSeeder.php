@@ -17,6 +17,16 @@ class DatabaseSeeder extends Seeder
             EscolasSeeder::class,
             EducadoresSeeder::class,
             AlunosSeeder::class,
+            AnexosSeeder::class,
+            ResponsaveisSeeder::class,
+            DiagnosticosSeeder::class,
+            InventarioHabilidadesSeeder::class,
+            HabilidadesSeeder::class,
+            OrientacoesPedagogicasSeeder::class,
+            MetasSeeder::class,
+            EntrevistasFamiliaresSeeder::class,
+            PlanejamentosSeeder::class,
+            RegistrosPedagogicosSeeder::class,
         ]);
     }
 }

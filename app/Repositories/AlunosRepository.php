@@ -24,6 +24,13 @@ class AlunosRepository
         return Aluno::with(['escola', 'diagnosticos'])->findOrFail($id);
     }
 
+    public function findWithRelations(int $id, array $relations, ?int $escolaId = null): Aluno
+    {
+        return Aluno::with($relations)
+            ->when($escolaId, fn ($query, $id) => $query->where('escola_id', $id))
+            ->findOrFail($id);
+    }
+
     public function update(Aluno $aluno, array $data): Aluno
     {
         $aluno->fill($data);

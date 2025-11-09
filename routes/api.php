@@ -57,6 +57,7 @@ Route::middleware('jwt')->group(function () {
 
     Route::get('/alunos', [AlunosController::class, 'index']);
     Route::get('/alunos/{id}', [AlunosController::class, 'show']);
+    Route::get('/alunos/{id}/detalhes', [AlunosController::class, 'details']);
     Route::post('/alunos', [AlunosController::class, 'store']);
     Route::put('/alunos/{id}', [AlunosController::class, 'update']);
     Route::delete('/alunos/{id}', [AlunosController::class, 'destroy']);

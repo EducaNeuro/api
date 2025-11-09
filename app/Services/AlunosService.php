@@ -26,6 +26,27 @@ class AlunosService
         return $this->alunosRepository->findOrFail($id);
     }
 
+    public function fullDetails(int $id): Aluno
+    {
+        $relations = [
+            'escola',
+            'responsaveis',
+            'diagnosticos',
+            'registrosPedagogicos',
+            'inventariosHabilidades',
+            'orientacoesPedagogicas',
+            'metas',
+            'habilidades',
+            'entrevistasFamiliares',
+            'planejamentos',
+            'educadores',
+        ];
+
+        $escolaId = AuthContext::escolaId();
+
+        return $this->alunosRepository->findWithRelations($id, $relations, $escolaId);
+    }
+
     public function update(int $id, array $data): Aluno
     {
         $aluno = $this->alunosRepository->findOrFail($id);
