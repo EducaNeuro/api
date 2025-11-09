@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\Encrypted;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -17,8 +18,15 @@ class Aluno extends Model
         'turno',
         'turma',
         'data_nascimento',
-        'escola_id'
+        'escola_id',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'nome' => Encrypted::class,
+        ];
+    }
 
     public function escola(): BelongsTo
     {
