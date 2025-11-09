@@ -14,6 +14,11 @@ class RegistroPedagogicoService
         return $this->registroPedagogicoRepository->all();
     }
 
+    public function findByAlunoId(int $alunoId): ?RegistroPedagogico
+    {
+        return $this->registroPedagogicoRepository->findByAlunoId($alunoId);
+    }
+
     public function find(int $id): RegistroPedagogico
     {
         return $this->registroPedagogicoRepository->findOrFail($id);

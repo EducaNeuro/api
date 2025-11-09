@@ -14,6 +14,11 @@ class OrientacoesPedagogicasService
         return $this->orientacoesPedagogicasRepository->all();
     }
 
+    public function findByAlunoId(int $alunoId): ?OrientacaoPedagogica
+    {
+        return $this->orientacoesPedagogicasRepository->findByAlunoId($alunoId);
+    }
+
     public function create(array $data): OrientacaoPedagogica
     {
         return $this->orientacoesPedagogicasRepository->create($data);

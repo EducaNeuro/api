@@ -14,6 +14,11 @@ class PlanoTrimestralService
         return $this->planoTrimestralRepository->all();
     }
 
+    public function findByAlunoId(int $alunoId): ?PlanoTrimestral
+    {
+        return $this->planoTrimestralRepository->findByAlunoId($alunoId);
+    }
+
     public function find(int $id): PlanoTrimestral
     {
         return $this->planoTrimestralRepository->findOrFail($id);

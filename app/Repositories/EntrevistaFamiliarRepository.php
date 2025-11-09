@@ -32,4 +32,9 @@ class EntrevistaFamiliarRepository
     {
         return EntrevistaFamiliar::count();
     }
+
+    public function findByAlunoId(int $alunoId): ?EntrevistaFamiliar
+    {
+        return EntrevistaFamiliar::where('aluno_id', $alunoId)->first();
+    }
 }

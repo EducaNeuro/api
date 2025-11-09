@@ -14,6 +14,11 @@ class PlanejamentoService
         return $this->planejamentoRepository->all();
     }
 
+    public function findByAlunoId(int $alunoId): ?Planejamento
+    {
+        return $this->planejamentoRepository->findByAlunoId($alunoId);
+    }
+
     public function find(int $id): Planejamento
     {
         return $this->planejamentoRepository->findOrFail($id);

@@ -10,6 +10,11 @@ class PlanoTrimestralRepository
         return PlanoTrimestral::with('planejamento')->get();
     }
 
+    public function findByAlunoId(int $alunoId): ?PlanoTrimestral
+    {
+        return PlanoTrimestral::with('planejamento')->where('aluno_id', $alunoId)->first();
+    }
+
     public function create(array $data): PlanoTrimestral
     {
         return PlanoTrimestral::create($data);

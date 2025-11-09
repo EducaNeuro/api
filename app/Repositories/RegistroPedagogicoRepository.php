@@ -10,6 +10,11 @@ class RegistroPedagogicoRepository
         return RegistroPedagogico::with(['aluno', 'anexo'])->get();
     }
 
+    public function findByAlunoId(int $alunoId): ?RegistroPedagogico
+    {
+        return RegistroPedagogico::with(['anexo'])->where('aluno_id', $alunoId)->first();
+    }
+
     public function create(array $data): RegistroPedagogico
     {
         return RegistroPedagogico::create($data);

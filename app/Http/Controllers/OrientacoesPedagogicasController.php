@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateOrientacaoPedagogicaRequest;
 use App\Services\OrientacoesPedagogicasService;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Request;
 
 class OrientacoesPedagogicasController extends Controller
 {
@@ -15,9 +16,18 @@ class OrientacoesPedagogicasController extends Controller
         //
     }
 
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        return response()->json($this->orientacoesPedagogicasService->all());
+        $alunoId = $request->query('aluno_id');
+
+        if ($alunoId) {
+            $orientacoesPedagogicas = $this->orientacoesPedagogicasService->findByAlunoId((int) $alunoId);
+            return response()->json($orientacoesPedagogicas);
+        }
+
+        return response()->json([
+            'message' => 'Parâmetro aluno_id é obrigatório.'
+        ], Response::HTTP_BAD_REQUEST);
     }
 
     public function show(int $id): JsonResponse

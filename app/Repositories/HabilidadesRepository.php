@@ -32,4 +32,9 @@ class HabilidadesRepository
     {
         return Habilidade::count();
     }
+
+    public function findByAlunoId(int $alunoId): ?Habilidade
+    {
+        return Habilidade::where('aluno_id', $alunoId)->first();
+    }
 }

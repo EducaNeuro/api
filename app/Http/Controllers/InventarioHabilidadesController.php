@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateHabilidadesIndividuaisRequest;
+use App\Http\Requests\IndexInventarioHabilidadesRequest;
 use App\Models\InventarioHabilidade;
 use App\Services\InventarioHabilidadesService;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class InventarioHabilidadesController extends Controller
 {
@@ -13,9 +15,12 @@ class InventarioHabilidadesController extends Controller
     {
     }
 
-    public function index(): JsonResponse
+    public function index(IndexInventarioHabilidadesRequest $request): JsonResponse
     {
-        return response()->json($this->inventarioHabilidadesService->all());
+        $alunoId = $request->validated()['aluno_id'];
+        $inventarioHabilidade = $this->inventarioHabilidadesService->findByAlunoId($alunoId);
+        
+        return response()->json($inventarioHabilidade);
     }
 
     public function show(int $id): JsonResponse

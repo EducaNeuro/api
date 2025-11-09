@@ -26,4 +26,14 @@ class HabilidadesService
         $habilidade = $this->habilidadesRepository->findOrFail($id);
         $this->habilidadesRepository->delete($habilidade);
     }
+
+    public function findByAlunoId(int $alunoId): ?Habilidade
+    {
+        return $this->habilidadesRepository->findByAlunoId($alunoId);
+    }
+
+    public function find(int $id): Habilidade
+    {
+        return $this->habilidadesRepository->findOrFail($id);
+    }
 }

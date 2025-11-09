@@ -23,4 +23,9 @@ class InventarioHabilidadesService
     {
         return $this->inventarioHabilidadesRepository->findOrFail($id);
     }
+
+    public function findByAlunoId(int $alunoId): ?InventarioHabilidade
+    {
+        return $this->inventarioHabilidadesRepository->findByAlunoId($alunoId);
+    }
 }

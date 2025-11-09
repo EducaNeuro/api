@@ -15,6 +15,30 @@ class EntrevistaFamiliarController extends Controller
         //
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function index(): JsonResponse
+    {
+        $alunoId = request()->query('aluno_id');
+
+        if ($alunoId) {
+            $entrevistaFamiliar = $this->entrevistaFamiliarService->findByAlunoId((int) $alunoId);
+            return response()->json($entrevistaFamiliar);
+        }
+
+        return response()->json([
+            'message' => 'Parâmetro aluno_id é obrigatório.'
+        ], Response::HTTP_BAD_REQUEST);
+    }
+
+    public function show(int $id): JsonResponse
+    {
+        $entrevistaFamiliar = $this->entrevistaFamiliarService->find($id);
+        return response()->json($entrevistaFamiliar);
+    }
+
     public function store(StoreEntrevistaFamiliarRequest $request): JsonResponse
     {
         $entrevistaFamiliar = $this->entrevistaFamiliarService->create($request->validated());

@@ -10,6 +10,11 @@ class OrientacoesPedagogicasRepository
         return OrientacaoPedagogica::all();
     }
 
+    public function findByAlunoId(int $alunoId): ?OrientacaoPedagogica
+    {
+        return OrientacaoPedagogica::where('aluno_id', $alunoId)->first();
+    }
+
     public function create(array $data): OrientacaoPedagogica
     {
         return OrientacaoPedagogica::create($data);

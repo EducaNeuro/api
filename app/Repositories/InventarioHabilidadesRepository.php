@@ -24,4 +24,9 @@ class InventarioHabilidadesRepository
     {
         return InventarioHabilidade::count();
     }
+
+    public function findByAlunoId(int $alunoId): ?InventarioHabilidade
+    {
+        return InventarioHabilidade::where('aluno_id', $alunoId)->first();
+    }
 }

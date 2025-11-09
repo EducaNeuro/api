@@ -10,6 +10,11 @@ class PlanejamentoRepository
         return Planejamento::with('aluno')->get();
     }
 
+    public function findByAlunoId(int $alunoId): ?Planejamento
+    {
+        return Planejamento::with('aluno')->where('aluno_id', $alunoId)->first();
+    }
+
     public function create(array $data): Planejamento
     {
         return Planejamento::create($data);

@@ -7,6 +7,7 @@ use App\Http\Requests\UpdatePlanoTrimestralRequest;
 use App\Services\PlanoTrimestralService;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Request;
 
 class PlanoTrimestralController extends Controller
 {
@@ -15,9 +16,18 @@ class PlanoTrimestralController extends Controller
         //
     }
 
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        return response()->json($this->planoTrimestralService->all());
+        $alunoId = $request->query('aluno_id');
+
+        if ($alunoId) {
+            $planoTrimestral = $this->planoTrimestralService->findByAlunoId((int) $alunoId);
+            return response()->json($planoTrimestral);
+        }
+
+        return response()->json([
+            'message' => 'Parâmetro aluno_id é obrigatório.'
+        ], Response::HTTP_BAD_REQUEST);
     }
 
     public function show(int $id): JsonResponse

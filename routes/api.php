@@ -43,10 +43,14 @@ Route::middleware('jwt')->group(function () {
     Route::put('/metas/{id}', [MetasController::class, 'update']);
     Route::delete('/metas/{id}', [MetasController::class, 'destroy']);
 
+    Route::get('/habilidades', [HabilidadesController::class, 'index']);
+    Route::get('/habilidades/{id}', [HabilidadesController::class, 'show']);
     Route::post('/habilidades', [HabilidadesController::class, 'store']);
     Route::put('/habilidades/{id}', [HabilidadesController::class, 'update']);
     Route::delete('/habilidades/{id}', [HabilidadesController::class, 'destroy']);
 
+    Route::get('/entrevista-familiar', [EntrevistaFamiliarController::class, 'index']);
+    Route::get('/entrevista-familiar/{id}', [EntrevistaFamiliarController::class, 'show']);
     Route::post('/entrevista-familiar', [EntrevistaFamiliarController::class, 'store']);
     Route::put('/entrevista-familiar/{id}', [EntrevistaFamiliarController::class, 'update']);
     Route::delete('/entrevista-familiar/{id}', [EntrevistaFamiliarController::class, 'destroy']);

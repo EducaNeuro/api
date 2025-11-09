@@ -26,4 +26,14 @@ class EntrevistaFamiliarService
         $entrevistaFamiliar = $this->entrevistaFamiliarRepository->findOrFail($id);
         $this->entrevistaFamiliarRepository->delete($entrevistaFamiliar);
     }
+
+    public function findByAlunoId(int $alunoId): ?EntrevistaFamiliar
+    {
+        return $this->entrevistaFamiliarRepository->findByAlunoId($alunoId);
+    }
+
+    public function find(int $id): EntrevistaFamiliar
+    {
+        return $this->entrevistaFamiliarRepository->findOrFail($id);
+    }
 }

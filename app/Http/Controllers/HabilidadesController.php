@@ -15,6 +15,26 @@ class HabilidadesController extends Controller
         //
     }
 
+    public function index(): JsonResponse
+    {
+        $alunoId = request()->query('aluno_id');
+
+        if ($alunoId) {
+            $habilidade = $this->habilidadesService->findByAlunoId((int) $alunoId);
+            return response()->json($habilidade);
+        }
+
+        return response()->json([
+            'message' => 'Parâmetro aluno_id é obrigatório.'
+        ], Response::HTTP_BAD_REQUEST);
+    }
+
+    public function show(int $id): JsonResponse
+    {
+        $habilidade = $this->habilidadesService->find($id);
+        return response()->json($habilidade);
+    }
+
     public function store(StoreHabilidadeRequest $request): JsonResponse
     {
         $habilidade = $this->habilidadesService->create($request->validated());
