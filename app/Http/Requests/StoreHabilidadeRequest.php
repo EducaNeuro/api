@@ -18,7 +18,8 @@ class StoreHabilidadeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'aluno_id' => ['required', 'integer', 'exists:alunos,id'],
+            'id' => ['sometimes', 'integer', 'exists:habilidades,id'],
+            'aluno_id' => ['required_without:id', 'integer', 'exists:alunos,id'],
             'autonomia_pessoal' => ['nullable', 'string'],
             'socializacao' => ['nullable', 'string'],
             'motricidade' => ['nullable', 'string'],

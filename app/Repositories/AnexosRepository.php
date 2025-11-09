@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Anexo;
+use Illuminate\Support\Arr;
 
 class AnexosRepository
 {
@@ -12,7 +13,14 @@ class AnexosRepository
 
     public function create(array $data): Anexo
     {
-        return Anexo::create($data);
+        $id = $data['id'] ?? null;
+        $payload = Arr::except($data, ['id']);
+
+        if (! $id) {
+            return Anexo::create($payload);
+        }
+
+        return Anexo::updateOrCreate(['id' => $id], $payload);
     }
 
     public function findOrFail(int $id): Anexo

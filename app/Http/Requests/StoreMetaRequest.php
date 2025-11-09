@@ -18,7 +18,8 @@ class StoreMetaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'aluno_id' => ['required', 'integer', 'exists:alunos,id'],
+            'id' => ['sometimes', 'integer', 'exists:metas,id'],
+            'aluno_id' => ['required_without:id', 'integer', 'exists:alunos,id'],
             'descricao_meta' => ['nullable', 'string'],
             'indicador_sucesso' => ['nullable', 'string'],
             'prazo' => ['nullable', 'date'],

@@ -19,7 +19,8 @@ class StorePlanoTrimestralRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'planejamento_id' => ['required', 'integer', 'exists:planejamento,id'],
+            'id' => ['sometimes', 'integer', 'exists:plano_trimestral,id'],
+            'planejamento_id' => ['required_without:id', 'integer', 'exists:planejamento,id'],
             'objetivo' => ['nullable', 'string'],
             'estrategias' => ['nullable', 'string'],
         ];

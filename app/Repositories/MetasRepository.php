@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Meta;
+use Illuminate\Support\Arr;
 
 class MetasRepository
 {
@@ -12,7 +13,14 @@ class MetasRepository
 
     public function create(array $data): Meta
     {
-        return Meta::create($data);
+        $id = $data['id'] ?? null;
+        $payload = Arr::except($data, ['id']);
+
+        if (! $id) {
+            return Meta::create($payload);
+        }
+
+        return Meta::updateOrCreate(['id' => $id], $payload);
     }
 
     public function findOrFail(int $id): Meta

@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\PlanoTrimestral;
+use Illuminate\Support\Arr;
 
 class PlanoTrimestralRepository
 {
@@ -17,7 +18,14 @@ class PlanoTrimestralRepository
 
     public function create(array $data): PlanoTrimestral
     {
-        return PlanoTrimestral::create($data);
+        $id = $data['id'] ?? null;
+        $payload = Arr::except($data, ['id']);
+
+        if (! $id) {
+            return PlanoTrimestral::create($payload);
+        }
+
+        return PlanoTrimestral::updateOrCreate(['id' => $id], $payload);
     }
 
     public function findOrFail(int $id): PlanoTrimestral

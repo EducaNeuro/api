@@ -23,7 +23,8 @@ class CreateHabilidadesIndividuaisRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'aluno_id' => 'required|exists:alunos,id',
+            'id' => ['sometimes', 'integer', 'exists:inventario_habilidades,id'],
+            'aluno_id' => ['required_without:id', 'exists:alunos,id'],
             'coordenacao_motora_grossa' => ['nullable', 'string', new MustBeEnumHabilidadesEnum()],
             'coordenacao_motora_fina' => ['nullable', 'string', new MustBeEnumHabilidadesEnum()],
             'equilibrio' => ['nullable', 'string', new MustBeEnumHabilidadesEnum()],

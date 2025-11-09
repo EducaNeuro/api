@@ -18,6 +18,7 @@ class StoreEntrevistaFamiliarRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'id' => ['sometimes', 'integer', 'exists:entrevista_familiar,id'],
             'aluno_id' => ['nullable', 'integer', 'exists:alunos,id'],
             'gestacao_e_primeiros_meses' => ['nullable', 'string'],
             'sociabilidade' => ['nullable', 'string'],

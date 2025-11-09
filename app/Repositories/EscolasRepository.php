@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Escola;
+use Illuminate\Support\Arr;
 
 class EscolasRepository
 {
@@ -12,7 +13,14 @@ class EscolasRepository
 
     public function create(array $data): Escola
     {
-        return Escola::create($data);
+        $id = $data['id'] ?? null;
+        $payload = Arr::except($data, ['id']);
+
+        if (! $id) {
+            return Escola::create($payload);
+        }
+
+        return Escola::updateOrCreate(['id' => $id], $payload);
     }
 
     public function findOrFail(int $id): Escola

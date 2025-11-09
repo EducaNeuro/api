@@ -19,7 +19,8 @@ class StoreRegistroPedagogicoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'aluno_id' => ['required', 'integer', 'exists:alunos,id'],
+            'id' => ['sometimes', 'integer', 'exists:registro_pedagogico,id'],
+            'aluno_id' => ['required_without:id', 'integer', 'exists:alunos,id'],
             'anexo_id' => ['nullable', 'integer', 'exists:anexos,id'],
             'registro_desenvolvimento' => ['nullable', 'string'],
             'observacoes_pedagogicas' => ['nullable', 'string'],

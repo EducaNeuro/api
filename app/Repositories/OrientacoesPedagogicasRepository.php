@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\OrientacaoPedagogica;
+use Illuminate\Support\Arr;
 
 class OrientacoesPedagogicasRepository
 {
@@ -17,7 +18,14 @@ class OrientacoesPedagogicasRepository
 
     public function create(array $data): OrientacaoPedagogica
     {
-        return OrientacaoPedagogica::create($data);
+        $id = $data['id'] ?? null;
+        $payload = Arr::except($data, ['id']);
+
+        if (! $id) {
+            return OrientacaoPedagogica::create($payload);
+        }
+
+        return OrientacaoPedagogica::updateOrCreate(['id' => $id], $payload);
     }
 
     public function findOrFail(int $id): OrientacaoPedagogica

@@ -24,12 +24,28 @@ class AnexosService
         return $this->anexosRepository->findOrFail($id);
     }
 
-    public function create(array $data, UploadedFile $file): Anexo
+    public function create(array $data, ?UploadedFile $file = null): Anexo
     {
-        $upload = $this->uploadFile($file);
+        $existing = null;
+
+        if (! empty($data['id'])) {
+            $existing = $this->anexosRepository->findOrFail((int) $data['id']);
+        }
+
+        if ($file) {
+            if ($existing) {
+                $this->deleteFileByUrl($existing->url);
+            }
+
+            $upload = $this->uploadFile($file);
+            $data['url'] = $upload['url'];
+        } elseif ($existing) {
+            $data['url'] = $existing->url;
+        }
 
         return $this->anexosRepository->create([
-            'url' => $upload['url'],
+            'id' => $data['id'] ?? null,
+            'url' => $data['url'] ?? $existing?->url,
             'observacao' => $data['observacao'] ?? null,
         ]);
     }

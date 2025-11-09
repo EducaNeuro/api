@@ -2,12 +2,20 @@
 namespace App\Repositories;
 
 use App\Models\EntrevistaFamiliar;
+use Illuminate\Support\Arr;
 
 class EntrevistaFamiliarRepository
 {
     public function create(array $data): EntrevistaFamiliar
     {
-        return EntrevistaFamiliar::create($data);
+        $id = $data['id'] ?? null;
+        $payload = Arr::except($data, ['id']);
+
+        if (! $id) {
+            return EntrevistaFamiliar::create($payload);
+        }
+
+        return EntrevistaFamiliar::updateOrCreate(['id' => $id], $payload);
     }
 
     public function findOrFail(int $id): EntrevistaFamiliar

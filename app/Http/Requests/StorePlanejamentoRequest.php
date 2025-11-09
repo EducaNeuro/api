@@ -19,7 +19,8 @@ class StorePlanejamentoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'aluno_id' => ['required', 'integer', 'exists:alunos,id'],
+            'id' => ['sometimes', 'integer', 'exists:planejamento,id'],
+            'aluno_id' => ['required_without:id', 'integer', 'exists:alunos,id'],
             'adaptacoes_ambientais' => ['nullable', 'string'],
             'organizacao_rotina' => ['nullable', 'string'],
             'estrategias_principais' => ['nullable', 'string'],

@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Diagnostico;
+use Illuminate\Support\Arr;
 
 class DiagnosticosRepository
 {
@@ -12,7 +13,14 @@ class DiagnosticosRepository
 
     public function create(array $data): Diagnostico
     {
-        return Diagnostico::create($data);
+        $id = $data['id'] ?? null;
+        $payload = Arr::except($data, ['id']);
+
+        if (! $id) {
+            return Diagnostico::create($payload);
+        }
+
+        return Diagnostico::updateOrCreate(['id' => $id], $payload);
     }
 
     public function findOrFail(int $id): Diagnostico

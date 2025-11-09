@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\InventarioHabilidade;
+use Illuminate\Support\Arr;
 
 class InventarioHabilidadesRepository
 {
@@ -12,7 +13,14 @@ class InventarioHabilidadesRepository
 
     public function create(array $data): InventarioHabilidade
     {
-        return InventarioHabilidade::create($data);
+        $id = $data['id'] ?? null;
+        $payload = Arr::except($data, ['id']);
+
+        if (! $id) {
+            return InventarioHabilidade::create($payload);
+        }
+
+        return InventarioHabilidade::updateOrCreate(['id' => $id], $payload);
     }
 
     public function findOrFail(int $id): InventarioHabilidade

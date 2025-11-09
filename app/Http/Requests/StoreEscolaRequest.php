@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class StoreEscolaRequest extends FormRequest
 {
@@ -19,10 +20,16 @@ class StoreEscolaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', 'unique:escolas,email'],
-            'password' => ['required', 'string', 'min:6'],
-            'secretaria_id' => ['required', 'integer', 'exists:secretarias,id'],
+            'id' => ['sometimes', 'integer', 'exists:escolas,id'],
+            'nome' => ['required_without:id', 'string', 'max:255'],
+            'email' => [
+                'required_without:id',
+                'email',
+                'max:255',
+                Rule::unique('escolas', 'email')->ignore($this->input('id')),
+            ],
+            'password' => ['required_without:id', 'string', 'min:6'],
+            'secretaria_id' => ['required_without:id', 'integer', 'exists:secretarias,id'],
         ];
     }
 

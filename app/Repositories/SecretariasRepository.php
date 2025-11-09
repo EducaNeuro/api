@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Secretaria;
+use Illuminate\Support\Arr;
 
 class SecretariasRepository
 {
@@ -12,7 +13,14 @@ class SecretariasRepository
 
     public function create(array $data): Secretaria
     {
-        return Secretaria::create($data);
+        $id = $data['id'] ?? null;
+        $payload = Arr::except($data, ['id']);
+
+        if (! $id) {
+            return Secretaria::create($payload);
+        }
+
+        return Secretaria::updateOrCreate(['id' => $id], $payload);
     }
 
     public function findOrFail(int $id): Secretaria

@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Planejamento;
+use Illuminate\Support\Arr;
 
 class PlanejamentoRepository
 {
@@ -17,7 +18,14 @@ class PlanejamentoRepository
 
     public function create(array $data): Planejamento
     {
-        return Planejamento::create($data);
+        $id = $data['id'] ?? null;
+        $payload = Arr::except($data, ['id']);
+
+        if (! $id) {
+            return Planejamento::create($payload);
+        }
+
+        return Planejamento::updateOrCreate(['id' => $id], $payload);
     }
 
     public function findOrFail(int $id): Planejamento

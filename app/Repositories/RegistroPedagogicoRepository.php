@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\RegistroPedagogico;
+use Illuminate\Support\Arr;
 
 class RegistroPedagogicoRepository
 {
@@ -17,7 +18,14 @@ class RegistroPedagogicoRepository
 
     public function create(array $data): RegistroPedagogico
     {
-        return RegistroPedagogico::create($data);
+        $id = $data['id'] ?? null;
+        $payload = Arr::except($data, ['id']);
+
+        if (! $id) {
+            return RegistroPedagogico::create($payload);
+        }
+
+        return RegistroPedagogico::updateOrCreate(['id' => $id], $payload);
     }
 
     public function findOrFail(int $id): RegistroPedagogico

@@ -18,7 +18,8 @@ class StoreOrientacaoPedagogicaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'aluno_id' => ['required', 'integer', 'exists:alunos,id'],
+            'id' => ['sometimes', 'integer', 'exists:orientacoes_pedagogicas,id'],
+            'aluno_id' => ['required_without:id', 'integer', 'exists:alunos,id'],
             'estimulos_recomendados' => ['nullable', 'string'],
             'recursos_recomendados' => ['nullable', 'string'],
             'estrategias_pedagogicas' => ['nullable', 'string'],

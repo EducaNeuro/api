@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Responsavel;
+use Illuminate\Support\Arr;
 
 class ResponsaveisRepository
 {
@@ -12,7 +13,14 @@ class ResponsaveisRepository
 
     public function create(array $data): Responsavel
     {
-        return Responsavel::create($data);
+        $id = $data['id'] ?? null;
+        $payload = Arr::except($data, ['id']);
+
+        if (! $id) {
+            return Responsavel::create($payload);
+        }
+
+        return Responsavel::updateOrCreate(['id' => $id], $payload);
     }
 
     public function findOrFail(int $id): Responsavel

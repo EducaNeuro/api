@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Educador;
+use Illuminate\Support\Arr;
 
 class EducadoresRepository
 {
@@ -15,7 +16,14 @@ class EducadoresRepository
 
     public function create(array $data): Educador
     {
-        return Educador::create($data);
+        $id = $data['id'] ?? null;
+        $payload = Arr::except($data, ['id']);
+
+        if (! $id) {
+            return Educador::create($payload);
+        }
+
+        return Educador::updateOrCreate(['id' => $id], $payload);
     }
 
     public function findOrFail(int $id, ?int $escolaId = null): Educador

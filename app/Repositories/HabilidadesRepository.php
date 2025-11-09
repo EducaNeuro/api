@@ -2,12 +2,20 @@
 namespace App\Repositories;
 
 use App\Models\Habilidade;
+use Illuminate\Support\Arr;
 
 class HabilidadesRepository
 {
     public function create(array $data): Habilidade
     {
-        return Habilidade::create($data);
+        $id = $data['id'] ?? null;
+        $payload = Arr::except($data, ['id']);
+
+        if (! $id) {
+            return Habilidade::create($payload);
+        }
+
+        return Habilidade::updateOrCreate(['id' => $id], $payload);
     }
 
     public function findOrFail(int $id): Habilidade

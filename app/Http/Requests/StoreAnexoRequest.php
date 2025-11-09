@@ -19,7 +19,8 @@ class StoreAnexoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'file' => ['required', 'file', 'max:20480'],
+            'id' => ['sometimes', 'integer', 'exists:anexos,id'],
+            'file' => ['required_without:id', 'file', 'max:20480'],
             'observacao' => ['nullable', 'string'],
         ];
     }

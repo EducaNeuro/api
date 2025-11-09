@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Aluno;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class AlunosRepository
@@ -16,7 +17,14 @@ class AlunosRepository
 
     public function create(array $data): Aluno
     {
-        return Aluno::create($data);
+        $id = $data['id'] ?? null;
+        $payload = Arr::except($data, ['id']);
+
+        if (! $id) {
+            return Aluno::create($payload);
+        }
+
+        return Aluno::updateOrCreate(['id' => $id], $payload);
     }
 
     public function findOrFail(int $id): Aluno

@@ -17,7 +17,9 @@ class EscolasService
 
     public function create(array $data): Escola
     {
-        $data['password'] = Hash::make($data['password']);
+        if (array_key_exists('password', $data)) {
+            $data['password'] = Hash::make($data['password']);
+        }
 
         return $this->escolasRepository->create($data);
     }

@@ -19,8 +19,9 @@ class StoreDiagnosticoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome' => ['required', 'string', 'max:255'],
-            'aluno_id' => ['required', 'integer', 'exists:alunos,id'],
+            'id' => ['sometimes', 'integer', 'exists:diagnosticos,id'],
+            'nome' => ['required_without:id', 'string', 'max:255'],
+            'aluno_id' => ['required_without:id', 'integer', 'exists:alunos,id'],
             'observacoes' => ['nullable', 'string'],
         ];
     }

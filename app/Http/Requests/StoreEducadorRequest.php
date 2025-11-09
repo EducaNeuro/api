@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class StoreEducadorRequest extends FormRequest
 {
@@ -19,11 +20,22 @@ class StoreEducadorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'email', 'max:255', 'unique:educadores,email'],
-            'cpf' => ['required', 'string', 'max:14', 'unique:educadores,cpf'],
-            'telefone' => ['required', 'string', 'max:15'],
-            'disciplina' => ['required', 'string', 'max:50'],
-            'turno' => ['required', 'string', 'max:50', 'in:manha,tarde,noite'],
+            'id' => ['sometimes', 'integer', 'exists:educadores,id'],
+            'email' => [
+                'required_without:id',
+                'email',
+                'max:255',
+                Rule::unique('educadores', 'email')->ignore($this->input('id')),
+            ],
+            'cpf' => [
+                'required_without:id',
+                'string',
+                'max:14',
+                Rule::unique('educadores', 'cpf')->ignore($this->input('id')),
+            ],
+            'telefone' => ['required_without:id', 'string', 'max:15'],
+            'disciplina' => ['required_without:id', 'string', 'max:50'],
+            'turno' => ['required_without:id', 'string', 'max:50', 'in:manha,tarde,noite'],
         ];
     }
 
