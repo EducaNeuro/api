@@ -16,6 +16,8 @@ class Escola extends Authenticatable
         'password',
         'remember_token',
         'secretaria_id',
+        'endereco',
+        'telefone',
     ];
 
     protected $hidden = [

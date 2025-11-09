@@ -75,6 +75,7 @@ Route::middleware('jwt')->group(function () {
     Route::delete('/educadores/{id}', [EducadoresController::class, 'destroy']);
 
     Route::get('/escolas', [EscolasController::class, 'index']);
+    Route::get('/escolas/statistics/geral', [EscolasController::class, 'statistics']);
     Route::get('/escolas/{id}', [EscolasController::class, 'show']);
     Route::post('/escolas', [EscolasController::class, 'store']);
     Route::put('/escolas/{id}', [EscolasController::class, 'update']);

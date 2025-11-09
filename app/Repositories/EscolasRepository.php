@@ -40,4 +40,42 @@ class EscolasRepository
     {
         $escola->delete();
     }
+
+    public function getWithStatistics(?int $secretariaId = null): array
+    {
+        $query = Escola::selectRaw('
+                escolas.id,
+                escolas.nome,
+                escolas.email,
+                escolas.secretaria_id,
+                COUNT(DISTINCT alunos.id) as total_alunos,
+                COUNT(DISTINCT educadores.id) as total_educadores
+            ')
+            ->leftJoin('alunos', 'escolas.id', '=', 'alunos.escola_id')
+            ->leftJoin('educadores', 'escolas.id', '=', 'educadores.escola_id')
+            ->with('secretaria');
+
+        if ($secretariaId) {
+            $query->where('escolas.secretaria_id', $secretariaId);
+        }
+
+        return $query->groupBy('escolas.id', 'escolas.nome', 'escolas.email', 'escolas.secretaria_id')
+            ->orderBy('escolas.nome')
+            ->get()
+            ->map(function ($escola) {
+                return [
+                    'id' => $escola->id,
+                    'nome' => $escola->nome,
+                    'email' => $escola->email,
+                    'secretaria_id' => $escola->secretaria_id,
+                    'secretaria' => $escola->secretaria ? [
+                        'id' => $escola->secretaria->id,
+                        'nome' => $escola->secretaria->nome,
+                    ] : null,
+                    'total_alunos' => $escola->total_alunos,
+                    'total_educadores' => $escola->total_educadores,
+                ];
+            })
+            ->toArray();
+    }
 }

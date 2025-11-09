@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreEscolaRequest;
 use App\Http\Requests\UpdateEscolaRequest;
 use App\Services\EscolasService;
+use App\Support\AuthContext;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -52,5 +53,17 @@ class EscolasController extends Controller
         $this->escolasService->delete($id);
 
         return response()->json(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function statistics(): JsonResponse
+    {
+        $secretariaId = AuthContext::secretariaId();
+        $escolas = $this->escolasService->getWithStatistics($secretariaId);
+
+        return response()->json([
+            'escolas' => $escolas,
+            'total_escolas' => count($escolas),
+            'secretaria_id' => $secretariaId
+        ]);
     }
 }

@@ -45,4 +45,9 @@ class EscolasService
         $escola = $this->escolasRepository->findOrFail($id);
         $this->escolasRepository->delete($escola);
     }
+
+    public function getWithStatistics(?int $secretariaId = null): array
+    {
+        return $this->escolasRepository->getWithStatistics($secretariaId);
+    }
 }
