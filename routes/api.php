@@ -105,6 +105,7 @@ Route::middleware('jwt')->group(function () {
     Route::delete('/registros-pedagogicos/{id}', [RegistroPedagogicoController::class, 'destroy']);
 
     Route::get('/diagnosticos', [DiagnosticosController::class, 'index']);
+    Route::get('/diagnosticos/ranking/geral', [DiagnosticosController::class, 'ranking']);
     Route::get('/diagnosticos/{id}', [DiagnosticosController::class, 'show']);
     Route::post('/diagnosticos', [DiagnosticosController::class, 'store']);
     Route::put('/diagnosticos/{id}', [DiagnosticosController::class, 'update']);

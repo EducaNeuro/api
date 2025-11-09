@@ -36,4 +36,9 @@ class DiagnosticosService
         $diagnostico = $this->diagnosticosRepository->findOrFail($id);
         $this->diagnosticosRepository->delete($diagnostico);
     }
+
+    public function getRanking(?int $escolaId = null): array
+    {
+        return $this->diagnosticosRepository->getRanking($escolaId);
+    }
 }

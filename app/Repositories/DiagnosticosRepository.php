@@ -32,4 +32,23 @@ class DiagnosticosRepository
     {
         $diagnostico->delete();
     }
+
+    public function getRanking(?int $escolaId = null): array
+    {
+        $query = Diagnostico::selectRaw('diagnosticos.nome, COUNT(*) as total')
+            ->join('alunos', 'diagnosticos.aluno_id', '=', 'alunos.id');
+
+        if ($escolaId) {
+            $query->where('alunos.escola_id', $escolaId);
+        }
+
+        return $query->groupBy('diagnosticos.nome')
+            ->orderByDesc('total')
+            ->get()
+            ->map(fn($item) => [
+                'diagnostico' => $item->nome,
+                'total_casos' => $item->total
+            ])
+            ->toArray();
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreDiagnosticoRequest;
 use App\Http\Requests\UpdateDiagnosticoRequest;
 use App\Services\DiagnosticosService;
+use App\Support\AuthContext;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -52,5 +53,17 @@ class DiagnosticosController extends Controller
         $this->diagnosticosService->delete($id);
 
         return response()->json(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function ranking(): JsonResponse
+    {
+        $escolaId = AuthContext::escolaId();
+        $ranking = $this->diagnosticosService->getRanking($escolaId);
+
+        return response()->json([
+            'ranking' => $ranking,
+            'total_diagnosticos' => count($ranking),
+            'escola_id' => $escolaId
+        ]);
     }
 }
