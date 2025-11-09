@@ -224,7 +224,6 @@ php artisan migrate --seed
 npm run build
 ```
 
-
 ---
 
 ## 🌐 Servidor de Desenvolvimento
@@ -514,22 +513,6 @@ AWS_DEFAULT_REGION=...
 AWS_BUCKET=...
 ```
 
-### Otimizações
-
-```bash
-# Cache de configuração
-php artisan config:cache
-
-# Cache de rotas
-php artisan route:cache
-
-# Cache de views
-php artisan view:cache
-
-# Otimizar autoloader
-composer install --optimize-autoloader --no-dev
-```
-
 ---
 
 ## 💡 Diferenciais Técnicos
@@ -574,10 +557,10 @@ composer install --optimize-autoloader --no-dev
 
 **Desenvolvido durante o Hackathon [Nome do Hackathon] 2025**
 
-- 👨‍💻 **Rian** - Desenvolvedor
-- 👨‍💻 **Igor** - Desenvolvedor Backend
-- 👩‍💻 **Lucas** - Desenvolvedor
-- 👨‍💻 **Sergio** - Desenvolvedor
+- 👨‍💻 **Rian** - rianluccas08@gmail.com
+- 👨‍💻 **Igor** - igormarquesdazevedo11@gmail.com
+- 👩‍💻 **Lucas** - lucaspimen18@gmail.com
+- 👨‍💻 **Sergio** - sergiofilhoja@hotmail.com
 
 ---
 
