@@ -18,7 +18,9 @@ class Planejamento extends Model
         'outros_recursos',
         'objetivos',
         'estrategias',
-        'observacoes_gerais'
+        'observacoes_gerais',
+        'prazo',
+        'indicador_sucesso',
     ];
 
     public function aluno(): BelongsTo
