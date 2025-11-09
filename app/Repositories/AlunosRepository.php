@@ -12,7 +12,7 @@ class AlunosRepository
         return Aluno::when(
             $escolaId,
             fn ($query, $id) => $query->where('escola_id', $id)
-        )->with(['escola', 'diagnosticos'])->get();
+        )->with(['escola', 'diagnosticos', 'anexos'])->get();
     }
 
     public function create(array $data): Aluno
@@ -29,7 +29,7 @@ class AlunosRepository
 
     public function findOrFail(int $id): Aluno
     {
-        return Aluno::with(['escola', 'diagnosticos'])->findOrFail($id);
+        return Aluno::with(['escola', 'diagnosticos', 'anexos'])->findOrFail($id);
     }
 
     public function findWithRelations(int $id, array $relations, ?int $escolaId = null): Aluno

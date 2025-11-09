@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Aluno;
 use App\Models\Anexo;
 use App\Repositories\AnexosRepository;
 use Illuminate\Http\UploadedFile;
@@ -43,11 +44,17 @@ class AnexosService
             $data['url'] = $existing->url;
         }
 
-        return $this->anexosRepository->create([
+        $anexo = $this->anexosRepository->create([
             'id' => $data['id'] ?? null,
             'url' => $data['url'] ?? $existing?->url,
             'observacao' => $data['observacao'] ?? null,
         ]);
+
+        if (! empty($data['aluno_id'])) {
+            $this->attachToAluno($anexo, (int) $data['aluno_id']);
+        }
+
+        return $anexo;
     }
 
     public function update(int $id, array $data, ?UploadedFile $file = null): Anexo
@@ -66,7 +73,13 @@ class AnexosService
             'observacao' => $data['observacao'] ?? null,
         ], static fn ($value) => $value !== null);
 
-        return $this->anexosRepository->update($anexo, $payload);
+        $updated = $this->anexosRepository->update($anexo, $payload);
+
+        if (! empty($data['aluno_id'])) {
+            $this->attachToAluno($updated, (int) $data['aluno_id']);
+        }
+
+        return $updated;
     }
 
     public function delete(int $id): void
@@ -165,5 +178,11 @@ class AnexosService
     private function diskName(): string
     {
         return config('filesystems.cloud', 'supabase');
+    }
+
+    private function attachToAluno(Anexo $anexo, int $alunoId): void
+    {
+        $aluno = Aluno::findOrFail($alunoId);
+        $aluno->anexos()->syncWithoutDetaching([$anexo->id]);
     }
 }

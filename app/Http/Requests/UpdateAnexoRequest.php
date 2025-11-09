@@ -21,6 +21,7 @@ class UpdateAnexoRequest extends FormRequest
         return [
             'file' => ['sometimes', 'file', 'max:20480'],
             'observacao' => ['sometimes', 'nullable', 'string'],
+            'aluno_id' => ['sometimes', 'nullable', 'integer', 'exists:alunos,id'],
         ];
     }
 

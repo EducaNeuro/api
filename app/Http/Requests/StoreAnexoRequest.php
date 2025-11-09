@@ -22,6 +22,7 @@ class StoreAnexoRequest extends FormRequest
             'id' => ['sometimes', 'integer', 'exists:anexos,id'],
             'file' => ['required_without:id', 'file', 'max:20480'],
             'observacao' => ['nullable', 'string'],
+            'aluno_id' => ['nullable', 'integer', 'exists:alunos,id'],
         ];
     }
 

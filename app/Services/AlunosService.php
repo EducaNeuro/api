@@ -39,6 +39,7 @@ class AlunosService
             'habilidades',
             'entrevistasFamiliares',
             'planejamentos.planosTrimestral',
+            'anexos',
         ];
 
         $escolaId = AuthContext::escolaId();
@@ -151,6 +152,17 @@ class AlunosService
             'turno' => $aluno->turno,
             'turma' => $aluno->turma,
             'data_nascimento' => $aluno->data_nascimento,
+            'anexos' => $this->formatAnexos($aluno),
         ];
     }
-}   
+
+    private function formatAnexos(Aluno $aluno): array
+    {
+        return $aluno->anexos
+            ->map(
+                fn ($anexo) => $anexo->only(['id', 'url', 'observacao'])
+            )
+            ->values()
+            ->toArray();
+    }
+}

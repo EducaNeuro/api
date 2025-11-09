@@ -82,4 +82,9 @@ class Aluno extends Model
     {
         return $this->hasMany(Planejamento::class);
     }
+
+    public function anexos(): BelongsToMany
+    {
+        return $this->belongsToMany(Anexo::class, 'aluno_anexo');
+    }
 }
