@@ -28,6 +28,8 @@ class StorePlanejamentoRequest extends FormRequest
             'objetivos' => ['nullable', 'string'],
             'estrategias' => ['nullable', 'string'],
             'observacoes_gerais' => ['nullable', 'string'],
+            'prazo' => ['nullable', 'date'],
+            'indicador_sucesso' => ['nullable', 'string'],
         ];
     }
 

@@ -27,6 +27,8 @@ class UpdatePlanejamentoRequest extends FormRequest
             'objetivos' => ['sometimes', 'nullable', 'string'],
             'estrategias' => ['sometimes', 'nullable', 'string'],
             'observacoes_gerais' => ['sometimes', 'nullable', 'string'],
+            'prazo' => ['sometimes', 'nullable', 'date'],
+            'indicador_sucesso' => ['sometimes', 'nullable', 'string'],
         ];
     }
 
