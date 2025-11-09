@@ -40,7 +40,7 @@ class AuthService
             'user_type' => $type,
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'expires_in' => self::TOKEN_TTL_MINUTES * 60,
+            'expires_in' => self::TOKEN_TTL_MINUTES * 60000000,
         ];
     }
 
